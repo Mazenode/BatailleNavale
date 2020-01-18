@@ -23,12 +23,13 @@ public class MenuPrincipalView extends JFrame {
 	private ImageIcon imgJ2pasActif = new ImageIcon(this.getClass().getResource("/joueur2_pas_active.png"));
 	
 	private JLabel background, boutonDemo, boutonJ1, boutonJ2;
-	
+
 	public MenuPrincipalView(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(x, y);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
+	
 		
 		boutonDemo = new JLabel(imgDemoPasActif);
 		boutonDemo.setBounds(736,530,441,90);
@@ -42,10 +43,12 @@ public class MenuPrincipalView extends JFrame {
 		boutonJ2.setBounds(736,775,441,90);
 		add(boutonJ2);
 		
+
 		background = new JLabel("", imgBackground, JLabel.CENTER);
 		background.setBounds(0,0,x,y);
 		add(background);
-
+		
+		
 	}
 	
 	public final JLabel getDemoLabel(){

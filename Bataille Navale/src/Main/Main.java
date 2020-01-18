@@ -1,10 +1,7 @@
 package Main;
 import Controller.MenuPrincipalController;
 import Model.MenuPrincipalModel;
-import Model.Navir;
-import View.MenuPrincipalView;
-import Model.GrilleModel;
-import Model.JeuModel;
+import View.MenuPrincipalView;;
 
 public class Main {
 
@@ -14,15 +11,18 @@ public class Main {
 		 les autres frames seront lancées à partir des différents contrôlleurs en fonction des 
 		 choix de l'utilisateur */
 		
-		//MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
+
+		MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
 		
-		//menuPrincipalModel = new MenuPrincipalModel();
+		MenuPrincipalModel menuPrincipalModel = new MenuPrincipalModel();
+	
+		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
+        
+		/*Initialisation de la grille dans la console :
+		 * GrilleModel grilleModel= new GrilleModel();
+        JeuModel jeuModel = new JeuModel();*/
 		
-		//MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
-		
-        GrilleModel grilleModel= new GrilleModel();
-        JeuModel jeuModel = new JeuModel();
-		
+
 	}
 
 }
