@@ -1,7 +1,10 @@
 package Main;
 import Controller.MenuPrincipalController;
 import Model.MenuPrincipalModel;
-import View.MenuPrincipalView;;
+import Model.Navir;
+import View.MenuPrincipalView;
+import Model.GrilleModel;
+import Model.JeuModel;
 
 public class Main {
 
@@ -11,21 +14,15 @@ public class Main {
 		 les autres frames seront lancées à partir des différents contrôlleurs en fonction des 
 		 choix de l'utilisateur */
 		
-		MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
+		//MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
 		
-		MenuPrincipalModel menuPrincipalModel = new MenuPrincipalModel();
+		//menuPrincipalModel = new MenuPrincipalModel();
 		
-		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
-        
+		//MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
 		
+        GrilleModel grilleModel= new GrilleModel();
+        JeuModel jeuModel = new JeuModel();
 		
-		/* A mettre dans grille
-		 * for(i=0;i < grille[0].length;i++){
-        System.out.println(grille[i][j]);
-        for(j=0;j<grille[1].length;j++){
-                
-        }
-    }*/
 	}
 
 }
