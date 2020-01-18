@@ -4,7 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import Model.DemoModel;
+import Model.MenuPrincipalModel;
 import View.DemoView;
+import View.MenuPrincipalView;
 
 public class DemoController implements KeyListener{
 	private DemoView view;
@@ -28,7 +30,18 @@ public class DemoController implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			etape++;
-			view.getTextLabel().setIcon(model.getImage(etape));
+			if(etape>9) {
+				view.setVisible(false);
+				
+				MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
+				
+				MenuPrincipalModel menuPrincipalModel = new MenuPrincipalModel();
+				
+				MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
+			}
+			else {
+				view.getBackgroundLabel().setIcon(model.getImage(etape));
+			}			
 		}			
 	}
 
