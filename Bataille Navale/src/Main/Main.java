@@ -1,7 +1,10 @@
 package Main;
 import Controller.MenuPrincipalController;
 import Model.MenuPrincipalModel;
-import View.MenuPrincipalView;;
+import View.MenuPrincipalView;
+import Controller.ShipController;
+import Model.ShipModel;
+import View.ShipView;;
 
 public class Main {
 
@@ -12,12 +15,18 @@ public class Main {
 		 choix de l'utilisateur */
 		
 
-		MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
+		/*MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
 		
 		MenuPrincipalModel menuPrincipalModel = new MenuPrincipalModel();
 	
 		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
-        
+        */
+		
+		ShipView shipView = new ShipView();
+		ShipModel shipModel = new ShipModel(5);
+		
+		ShipController shipController = new ShipController(shipView, shipModel);
+		
 		/*Initialisation de la grille dans la console :
 		 * GrilleModel grilleModel= new GrilleModel();
         JeuModel jeuModel = new JeuModel();*/
