@@ -26,6 +26,8 @@ public class ShipView extends JFrame{
 	private ImageIcon imgShip = new ImageIcon(this.getClass().getResource("/petit-bateau.png"));
 	//private ImageIcon imgShip = new ImageIcon(new ImageIcon(this.getClass().getResource("/petit-bateau.png")).getImage().getScaledInstance(441,90, Image.SCALE_DEFAULT));
 	//private ImageIcon imgFond = new ImageIcon(this.getClass().getResource("/fond.png"));
+	
+	/* redimensionner !!! */
 	private ImageIcon imgFond = new ImageIcon(new ImageIcon(this.getClass().getResource("/fond.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 	private JLabel drawShip,background;
 	
