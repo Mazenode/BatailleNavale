@@ -1,17 +1,14 @@
 package Main;
-import Controller.MenuPrincipalController;
-import Model.MenuPrincipalModel;
-import View.MenuPrincipalView;
-import Controller.ShipController;
-import Model.ShipModel;
-import View.ShipView;;
+
+import View.GrilleView;
+import View.PlateauView;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		/*Le main du programme où on déclare le Modèle, la Vue et le contrôleur du menu principal,
-		 les autres frames seront lancées à partir des différents contrôlleurs en fonction des 
+		/*Le main du programme oï¿½ on dï¿½clare le Modï¿½le, la Vue et le contrï¿½leur du menu principal,
+		 les autres frames seront lancï¿½es ï¿½ partir des diffï¿½rents contrï¿½lleurs en fonction des 
 		 choix de l'utilisateur */
 		
 
@@ -19,19 +16,16 @@ public class Main {
 		
 		MenuPrincipalModel menuPrincipalModel = new MenuPrincipalModel();
 	
-		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
-        */
+		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);*/
 		
-		ShipView shipView = new ShipView();
-		ShipModel shipModel = new ShipModel(5);
-		
-		ShipController shipController = new ShipController(shipView, shipModel);
-		
+        
 		/*Initialisation de la grille dans la console :
 		 * GrilleModel grilleModel= new GrilleModel();
         JeuModel jeuModel = new JeuModel();*/
 		
-
+		
+		GrilleView grilleView = new GrilleView();
+		
 	}
 
 }
