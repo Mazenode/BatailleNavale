@@ -15,8 +15,8 @@ public class MenuPrincipalView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int x = 1920;
-	private int y = 1080;
+	private int x = 1366;
+	private int y = 768;
 	private ImageIcon imgBackground = new ImageIcon(this.getClass().getResource("/menu.png"));
 	private ImageIcon imgDemoPasActif = new ImageIcon(this.getClass().getResource("/demo_pas_active.png"));
 	private ImageIcon imgJ1pasActif = new ImageIcon(this.getClass().getResource("/joueur1_pas_active.png"));

@@ -5,8 +5,10 @@ import java.awt.event.MouseEvent;
 
 import Model.DemoModel;
 import Model.MenuPrincipalModel;
+import Model.SousMenuModel;
 import View.DemoView;
 import View.MenuPrincipalView;
+import View.SousMenuView;
 
 public class MenuPrincipalController{
 	
@@ -60,23 +62,38 @@ public class MenuPrincipalController{
 		
 		view.getDemoLabel().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
-				view.setVisible(false);
+				
 				DemoView demoView = new DemoView();
 				
 				DemoModel demoModel = new DemoModel();
 				
 				DemoController demoController = new DemoController(demoView, demoModel); 
+				
+				view.setVisible(false);
 			}
 		});		
 	
 		view.getJ1Label().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
+				
+				SousMenuView sousMenuView = new SousMenuView();
+				
+				SousMenuModel sousMenuModel = new SousMenuModel();
+				
+				SousMenuController sousMenuController = new SousMenuController(sousMenuView, sousMenuModel, "1 Joueur"); 
+				
 				view.setVisible(false);
 			}
 		});
 		
 		view.getJ2Label().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
+				
+				SousMenuView sousMenuView = new SousMenuView();
+				
+				SousMenuModel sousMenuModel = new SousMenuModel();
+				
+				SousMenuController sousMenuController = new SousMenuController(sousMenuView, sousMenuModel, "2 Joueurs"); 
 				view.setVisible(false);
 			}
 		});
