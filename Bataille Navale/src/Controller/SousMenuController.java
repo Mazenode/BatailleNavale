@@ -3,6 +3,7 @@ package Controller;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import Model.JeuModel;
 import Model.MenuPrincipalModel;
 import Model.SousMenuModel;
 import View.JeuView;
@@ -13,7 +14,7 @@ public class SousMenuController {
 	private SousMenuView view;
 	private SousMenuModel model;
 	
-	public SousMenuController(SousMenuView view, SousMenuModel model, String mode){
+	public SousMenuController(SousMenuView view, SousMenuModel model, int nbJoueur){
 		this.view = view;
 		this.model = model;
 		
@@ -68,8 +69,11 @@ public class SousMenuController {
 		view.getMode1().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView();
+				JeuView jeuView = new JeuView(nbJoueur);
 				
+				JeuModel jeuModel = new JeuModel();
+				
+				JeuController jeuController = new JeuController(jeuView, jeuModel);
 				view.setVisible(false);
 			}
 		});
@@ -77,27 +81,27 @@ public class SousMenuController {
 		view.getMode2().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView();
+				/*JeuView jeuView = new JeuView();
 				
-				view.setVisible(false);
+				view.setVisible(false);*/
 			}
 		});
 		
 		view.getMode3().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView();
+				/*JeuView jeuView = new JeuView();
 				
-				view.setVisible(false);
+				view.setVisible(false);*/
 			}
 		});
 		
 		view.getMode4().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView();
+				/*JeuView jeuView = new JeuView();
 				
-				view.setVisible(false);
+				view.setVisible(false);*/
 			}
 		});
 	}

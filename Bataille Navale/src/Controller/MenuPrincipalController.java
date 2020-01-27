@@ -80,7 +80,7 @@ public class MenuPrincipalController{
 				
 				SousMenuModel sousMenuModel = new SousMenuModel();
 				
-				SousMenuController sousMenuController = new SousMenuController(sousMenuView, sousMenuModel, "1 Joueur"); 
+				SousMenuController sousMenuController = new SousMenuController(sousMenuView, sousMenuModel, 1); 
 				
 				view.setVisible(false);
 			}
@@ -93,7 +93,7 @@ public class MenuPrincipalController{
 				
 				SousMenuModel sousMenuModel = new SousMenuModel();
 				
-				SousMenuController sousMenuController = new SousMenuController(sousMenuView, sousMenuModel, "2 Joueurs"); 
+				SousMenuController sousMenuController = new SousMenuController(sousMenuView, sousMenuModel, 2); 
 				view.setVisible(false);
 			}
 		});
