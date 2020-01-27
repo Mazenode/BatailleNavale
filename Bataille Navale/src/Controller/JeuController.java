@@ -14,6 +14,8 @@ public class JeuController {
 		this.view = view;
 		this.model = model;
 		
+		
+		
 		view.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
 				System.out.println("Mouse was clicked on my frame! x = " +e.getX()+" y = "+e.getY());

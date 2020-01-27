@@ -1,7 +1,10 @@
 package Main;
 
+import Controller.JeuController;
 import Controller.MenuPrincipalController;
+import Model.JeuModel;
 import Model.MenuPrincipalModel;
+import View.JeuView;
 import View.MenuPrincipalView;
 import View.PlateauView;
 
@@ -14,14 +17,17 @@ public class Main {
 		 choix de l'utilisateur */
 		
 
-		MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
+		/*MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
 		
 		MenuPrincipalModel menuPrincipalModel = new MenuPrincipalModel();
 	
-		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
+		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);*/
 		
+		JeuView jeuView = new JeuView(1);
 		
-		//GrilleView grilleView = new GrilleView();
+		JeuModel jeuModel = new JeuModel();
+		
+		JeuController jeuController = new JeuController(jeuView, jeuModel);
 		
 	}
 

@@ -9,21 +9,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Model.Case;
+
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class PlateauView extends JPanel {
+	private ArrayList<Case> liste = new ArrayList<>();
     private static final int SIZE = 10;
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)screenSize.getWidth();
     int height = (int)screenSize.getHeight();
+    private int tab[][];
+    
     public PlateauView(){
-
+    	
     }
-    public PlateauView(int posx, int posy) {
+    
+    public PlateauView(int posx, int posy, int tab[][]) {
         //this.setLayout(null);
         this.setVisible(true);
         JPanel p = new JPanel();
+        
+       this.tab = tab;
         
         p.setLayout(new GridLayout(SIZE, SIZE));
         p.setPreferredSize(new Dimension(700,700)); // taille de la grille 
@@ -33,23 +43,16 @@ public class PlateauView extends JPanel {
             button.setBackground(new Color (23,26,63));
             int x = j / SIZE;
             int y = j % SIZE;
-            button.addActionListener(event -> caseClick(button, x, y));
-        
+            Case caseCase = new Case(button, x, y);
+            liste.add(caseCase);
             p.add(button);
             add(p);
         }
     }
-
-    private void caseClick(JButton button, int x, int y) {
-        // l� tu mets le code � ex�cuter quand on clique sur la case
-        System.out.println("Vous avez cliqué la case colonne="+x+", ligne="+y);
-        if (button.getBackground().equals(Color.RED)){
-            button.setBackground(new Color (23,26,63));
-        }
-        else{
-            button.setBackground(Color.RED);
-        }
-        
+    
+    
+    ArrayList<Case> getListe(){
+    	return liste;
     }
 	
 }
