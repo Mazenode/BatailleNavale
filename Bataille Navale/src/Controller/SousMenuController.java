@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import Model.JeuModel;
 import Model.MenuPrincipalModel;
+import Model.Sound;
 import Model.SousMenuModel;
 import View.JeuView;
 import View.MenuPrincipalView;
@@ -25,6 +26,7 @@ public class SousMenuController {
 				view.getMode1().setIcon(model.getMode1Active());
 				view.getPopUp().setIcon(model.getPopUp());
 				view.getTextPopUp().setText(model.getModeExplication1());
+				Sound.playSound("/metal-sound.wav");
 				}
 			});		
 	
@@ -33,6 +35,7 @@ public class SousMenuController {
 				view.getMode2().setIcon(model.getMode2Active());
 				view.getPopUp().setIcon(model.getPopUp());
 				view.getTextPopUp().setText(model.getModeExplication2());
+				Sound.playSound("/metal-sound.wav");
 				}
 			});		
 		
@@ -41,6 +44,7 @@ public class SousMenuController {
 				view.getMode3().setIcon(model.getMode3Active());
 				view.getPopUp().setIcon(model.getPopUp());
 				view.getTextPopUp().setText(model.getModeExplication3());
+				Sound.playSound("/metal-sound.wav");
 				}
 			});		
 		
@@ -49,6 +53,7 @@ public class SousMenuController {
 				view.getMode4().setIcon(model.getMode4Active());
 				view.getPopUp().setIcon(model.getPopUp());
 				view.getTextPopUp().setText(model.getModeExplication4());
+				Sound.playSound("/metal-sound.wav");
 				}
 			});		
 		

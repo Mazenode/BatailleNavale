@@ -17,7 +17,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PlateauView extends JPanel {
-	private ArrayList<Case> liste = new ArrayList<>();
+	private static ArrayList<Case> listeGauche = new ArrayList<>();
+	private static ArrayList<Case> listeDroite = new ArrayList<>();
     private static final int SIZE = 10;
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int width = (int)screenSize.getWidth();
@@ -28,7 +29,7 @@ public class PlateauView extends JPanel {
     	
     }
     
-    public PlateauView(int posx, int posy, int tab[][]) {
+    public PlateauView(int posx, int posy, int tab[][], boolean botOrNot) {
         //this.setLayout(null);
         this.setVisible(true);
         JPanel p = new JPanel();
@@ -44,15 +45,24 @@ public class PlateauView extends JPanel {
             int x = j / SIZE;
             int y = j % SIZE;
             Case caseCase = new Case(button, x, y);
-            liste.add(caseCase);
+            if(botOrNot) {
+                listeGauche.add(caseCase);
+            }
+            else {
+            	listeDroite.add(caseCase);
+            }
             p.add(button);
             add(p);
         }
     }
     
     
-    ArrayList<Case> getListe(){
-    	return liste;
+    static ArrayList<Case> getListeGauche(){
+    	return listeGauche;
+    }
+    
+    static ArrayList<Case> getListeDroite(){
+    	return listeDroite;
     }
 	
 }

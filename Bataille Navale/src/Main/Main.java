@@ -4,6 +4,7 @@ import Controller.JeuController;
 import Controller.MenuPrincipalController;
 import Model.JeuModel;
 import Model.MenuPrincipalModel;
+import Model.Sound;
 import View.JeuView;
 import View.MenuPrincipalView;
 import View.PlateauView;
@@ -23,6 +24,8 @@ public class Main {
 	
 		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);*/
 		
+		//Sound.playSound("/battlefield-1942-theme.wav");
+
 		JeuView jeuView = new JeuView(1);
 		
 		JeuModel jeuModel = new JeuModel();

@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import Model.DemoModel;
 import Model.MenuPrincipalModel;
+import Model.Sound;
 import Model.SousMenuModel;
 import View.DemoView;
 import View.MenuPrincipalView;
@@ -23,7 +24,6 @@ public class MenuPrincipalController{
 	public MenuPrincipalController(MenuPrincipalView view, MenuPrincipalModel model) {
 		this.model = model;
 		this.view = view;
-		
 		view.setVisible(true);
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,18 +32,21 @@ public class MenuPrincipalController{
 		view.getDemoLabel().addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent e){
 				view.getDemoLabel().setIcon(model.getDemoActive());
+				Sound.playSound("/metal-sound.wav");
 				}
 			});		
 	
 		view.getJ1Label().addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent e){
 				view.getJ1Label().setIcon(model.getJ1Active());
+				Sound.playSound("/metal-sound.wav");
 			}
 		});
 		
 		view.getJ2Label().addMouseListener(new MouseAdapter(){
 			public void mouseEntered(MouseEvent e){
 				view.getJ2Label().setIcon(model.getJ2Active());
+				Sound.playSound("/metal-sound.wav");
 			}
 		});
 		
