@@ -32,6 +32,7 @@ public class JeuView extends JFrame {
 		this.setLayout(null);
 		
 		tab = new int[10][10];
+		tab[0][0] = 1;
 		
 		background = new JLabel("", imgBackground1Joueur, JLabel.CENTER);
 		background.setBounds(0,0, width, height);
@@ -48,9 +49,15 @@ public class JeuView extends JFrame {
 		plateauView2.setBounds(1110, 280, 700, 700);
 		plateauView2.setBackground(new Color (217,217,216));
 		
+		printGrille();
+		
+		if(!isBoardComplete()) {
+			plateauView1.getListe().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n)));
+			
+		}
 		
 		//Je récupère la liste de cases et je met un mouse listener sur tous les boutons
-		plateauView1.getListe().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n)));
+		//plateauView1.getListe().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n)));
 		
 		
 		add(background);	
@@ -77,17 +84,45 @@ public class JeuView extends JFrame {
 		}
 	}
 	
-	//Fonction qui été dans plateauView que j'ai ré-adapté dans JeuView.
-	 private void caseClick(Case caseCase) {
-	        System.out.println("Vous avez cliqué la case colonne="+caseCase.getX()+", ligne="+caseCase.getY());
-	        if (caseCase.getButton().getBackground().equals(Color.RED)){
-	        	caseCase.getButton().setBackground(new Color (23,26,63));
+	public boolean isBoardComplete()
+	{
+	    // sets complete to true
+	    boolean complete = false;
+
+	    //will change complete to false
+	    for (int i = 0; i < 10; i++)
+	    {
+	        for(int j =0; j < 10; j++)
+	        {
+	            if (tab[i][j] == 4 && tab[i][j] == 5 && tab[i][j] == 6 && tab[i][j] == 7)
+	            {
+	                complete = true;
+	            }
 	        }
-	        else{
-	        	caseCase.getButton().setBackground(Color.RED);
-	            tab[caseCase.getX()][caseCase.getY()] = 1;
-	            printGrille();
-	        }
-	        
 	    }
+	    return complete;
+	}
+	
+	//Fonction qui été dans plateauView que j'ai ré-adapté dans JeuView.
+	private void caseClick(Case caseCase) {
+        System.out.println("Vous avez clique la case colonne="+caseCase.getX()+", ligne="+caseCase.getY());
+        if (caseCase.getButton().getBackground().equals(Color.RED)){
+        	caseCase.getButton().setBackground(new Color (23,26,63));
+        }
+        else{
+        	
+            
+            if(tab[caseCase.getX()][caseCase.getY()] == 1) {
+    			tab[caseCase.getX()][caseCase.getY()] = 4;
+    			caseCase.getButton().setBackground(Color.RED);
+    		}
+    		
+    		if(tab[caseCase.getX()][caseCase.getY()] == 0) {
+    			tab[caseCase.getX()][caseCase.getY()] = 3;
+    			caseCase.getButton().setBackground(Color.WHITE);
+    		}
+    		printGrille();
+        }
+        
+    }
 }
