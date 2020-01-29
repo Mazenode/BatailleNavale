@@ -99,7 +99,7 @@ public class JeuController {
 	}
 	
 	public void checkTurn() {
-		if(isBoardComplete(view.gridGauche) && isBoardComplete(view.gridDroite)) {
+		if(isBoardComplete(view.gridDroite)) {
 			view.finish();
 		}
 		else {

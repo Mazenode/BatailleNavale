@@ -33,8 +33,8 @@ public class JeuView extends JFrame {
     int width = (int)screenSize.getWidth();
     int height = (int)screenSize.getHeight();
     private ImageIcon gifVictoire= new ImageIcon(new ImageIcon(this.getClass().getResource("/victoire.gif")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));;
-	private JLabel background;
-	private JLabel victoire;
+	public JLabel background;
+	public JLabel victoire;
 	public int gridGauche[][];
 	public int gridDroite[][];
 	public Bot bot;
@@ -61,9 +61,9 @@ public class JeuView extends JFrame {
         ShipView ship2 = new ShipView("/porte-avion-couche.png",4);
         add(ship2);
         
-    	PlateauView plateauView1 = new PlateauView(20,20, gridGauche, true);
+        this.plateauView1 = new PlateauView(20,20, gridGauche, true);
 		add(plateauView1);
-		PlateauView plateauView2 = new PlateauView(width*3/5,height*1/3, gridDroite, false);
+		this.plateauView2 = new PlateauView(width*3/5,height*1/3, gridDroite, false);
 		add(plateauView2);
 
 		plateauView1.setBounds(385, 280, 700, 700); //modifie la taille du comteneur de la grille doit etre egale a la taille de la grille
