@@ -38,7 +38,6 @@ public class PlateauView extends JPanel {
         
         p.setLayout(new GridLayout(SIZE, SIZE));
         p.setPreferredSize(new Dimension(700,700)); // taille de la grille 
-        p.setBackground(Color.RED);
         for (int j = 0; j < SIZE * SIZE; j++) { // permet de mettre les 100 bouttons
             JButton button = new JButton();
             button.setBackground(new Color (23,26,63));
@@ -57,11 +56,11 @@ public class PlateauView extends JPanel {
     }
     
     
-    static ArrayList<Case> getListeGauche(){
+    public static ArrayList<Case> getListeGauche(){
     	return listeGauche;
     }
     
-    static ArrayList<Case> getListeDroite(){
+    public static ArrayList<Case> getListeDroite(){
     	return listeDroite;
     }
 	

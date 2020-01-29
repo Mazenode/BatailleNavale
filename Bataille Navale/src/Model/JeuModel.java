@@ -4,16 +4,28 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class JeuModel {
+	static int[][] gridGauche;
+	static int[][] gridDroite;
 	
 	
-	public JeuModel() {
-		HashMap <String, Navire> mapNavire = new HashMap<String, Navire>();//test des hashmap
-		mapNavire.put("PorteAvionP1",new Navire("PorteAvionP1",5));
-		Navire nom = mapNavire.get("PorteAvionP1");
-		int type = nom.getType();
-		nom.SetCoord(1, 2);
-		int[] Coord = nom.getCoord();
-		System.out.println(type);
-		System.out.println(Arrays.toString(Coord));
+	public JeuModel(int[][] gridGauche,int[][] gridDroite) {
+		this.gridGauche = gridGauche;
+		this.gridDroite = gridDroite;
 	}
+	
+	public void printGrille() {
+		for(int j = 0; j < 10; j++) {
+			for(int i = 0; i < 10; i++) {
+				System.out.print(gridGauche[j][i]);
+				System.out.print(" ");
+			}
+			System.out.println("");
+		}
+	}
+	
+	public static int [][] getGridGauche(){
+		return gridGauche;
+		
+	}
+	
 }

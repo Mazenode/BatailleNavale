@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Model.AnimCase;
 import Model.Case;
+import Model.JeuModel;
+
 public class Bot {
 	private ArrayList<Case> liste;
 	private boolean toucher = false;
@@ -25,6 +27,6 @@ public class Bot {
 	}
 	
 	public void playMove() {
-		AnimCase anim = new AnimCase(liste.get(random()), JeuView.getGridGauche());
+		AnimCase anim = new AnimCase(liste.get(random()), JeuModel.getGridGauche());
 	}
 }

@@ -76,9 +76,9 @@ public class SousMenuController {
 				
 				JeuView jeuView = new JeuView(nbJoueur);
 				
-				JeuModel jeuModel = new JeuModel();
+				/*JeuModel jeuModel = new JeuModel();
 				
-				JeuController jeuController = new JeuController(jeuView, jeuModel);
+				JeuController jeuController = new JeuController(jeuView, jeuModel);*/
 				view.setVisible(false);
 			}
 		});

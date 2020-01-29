@@ -28,9 +28,9 @@ public class Main {
 
 		JeuView jeuView = new JeuView(1);
 		
-		JeuModel jeuModel = new JeuModel();
+		/*JeuModel jeuModel = new JeuModel();
 		
-		JeuController jeuController = new JeuController(jeuView, jeuModel);
+		JeuController jeuController = new JeuController(jeuView, jeuModel);*/
 		
 	}
 
