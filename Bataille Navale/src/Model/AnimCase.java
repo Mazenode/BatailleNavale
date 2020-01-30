@@ -22,7 +22,6 @@ public class AnimCase {
         	caseCase.getButton().setBackground(new Color (23,26,63));
         }
         else{
-
             if(grid[caseCase.getX()][caseCase.getY()] == 1) {
             	grid[caseCase.getX()][caseCase.getY()] = 2;
     			explosion.getImage().flush();

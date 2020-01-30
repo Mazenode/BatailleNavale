@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import Model.AnimCase;
+import Model.AnimRadar;
 import Model.Case;
 import Model.JeuModel;
 import Model.Sound;
@@ -22,11 +23,11 @@ public class JeuController {
 		
 		
 		
-		view.addMouseListener(new MouseAdapter() {
+		/*view.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e){
 				System.out.println("Mouse was clicked on my frame! x = " +e.getX()+" y = "+e.getY());
 			}
-		});
+		});*/
 		
 		view.plateauView1.getListeGauche().forEach((n) -> n.getButton().addMouseListener(new java.awt.event.MouseAdapter()
 	    {
@@ -73,7 +74,8 @@ public class JeuController {
 		
 		if(turnPlayer  == true) {
 			clickAnim(caseCase);
-	        
+	        clickRadar(caseCase);
+			
 	        checkTurn();
 	        
 	        turnPlayer = false;
@@ -96,6 +98,10 @@ public class JeuController {
 	
 	public void clickAnim(Case caseCase) {
 		AnimCase anim = new AnimCase(caseCase, view.gridDroite);
+	}
+	
+	public void clickRadar(Case caseCase) {
+		AnimRadar radar = new AnimRadar(caseCase, PlateauView.getListeDroite(), view.gridDroite);
 	}
 	
 	public void checkTurn() {

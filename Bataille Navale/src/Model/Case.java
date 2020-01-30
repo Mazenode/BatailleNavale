@@ -4,7 +4,7 @@ import javax.swing.JButton;
 
 public class Case {
 	private JButton button;
-	private int x, y;
+	private int x, y, valeur;
 	
 	public Case() {
 		
@@ -16,6 +16,7 @@ public class Case {
 		this.y = y;
 	}
 	
+	
 	public int getX() {
 		return x;
 	}
@@ -26,5 +27,13 @@ public class Case {
 	
 	public JButton getButton() {
 		return button;
+	}
+	
+	public void setValue(int valeur) {
+		this.valeur = valeur;
+	}
+	
+	public int getValue() {
+		return this.valeur;
 	}
 }
