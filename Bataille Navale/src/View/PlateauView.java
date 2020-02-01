@@ -34,6 +34,7 @@ public class PlateauView extends JPanel {
         this.setVisible(true);
         JPanel p = new JPanel();
         
+        
        this.tab = tab;
         
         p.setLayout(new GridLayout(SIZE, SIZE));

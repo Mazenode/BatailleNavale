@@ -17,11 +17,6 @@ public class AnimCase {
 	public AnimCase(Case caseCase, int grid[][]) {
 		this.grid = grid;
 		
-		System.out.println("Vous avez clique la case colonne="+caseCase.getX()+", ligne="+caseCase.getY());
-        if (caseCase.getButton().getBackground().equals(Color.RED)){
-        	caseCase.getButton().setBackground(new Color (23,26,63));
-        }
-        else{
             if(grid[caseCase.getX()][caseCase.getY()] == 1) {
             	grid[caseCase.getX()][caseCase.getY()] = 2;
     			explosion.getImage().flush();
@@ -35,7 +30,7 @@ public class AnimCase {
     			caseCase.getButton().setIcon(splash);
     			Sound.playSound("/splash-sound.wav");
     		}
-        }
+        
 	}
 	
 }
