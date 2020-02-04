@@ -20,7 +20,7 @@ import View.PlateauView;
 public class JeuController implements KeyListener {
 	private JeuView view;
 	private JeuModel model;
-	private boolean turnPlayer;
+	private static boolean turnPlayer;
 	private JButton bouton;
 
 	public JeuController(JeuView view, JeuModel model) {
@@ -134,7 +134,12 @@ public class JeuController implements KeyListener {
 			setTimeout(() -> view.bot.playMove(), 1500);
 		}
 	}
+	
+	public static boolean getTurnPlayer(){
+        return turnPlayer;
+    }
 
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub

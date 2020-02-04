@@ -19,6 +19,7 @@ public class AnimArtillerie {
 	private int y, x = 0;
 	private ArrayList<Case> listeCase;
 	private ImageIcon cible = new ImageIcon(this.getClass().getResource("/cible.png"));
+	private ImageIcon splash = new ImageIcon(this.getClass().getResource("/splash-finale.png"));
 	private ImageIcon fond = new ImageIcon(this.getClass().getResource("/artillerie.png"));
 	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public int width = (int)screenSize.getWidth();
@@ -56,6 +57,7 @@ public class AnimArtillerie {
 			thread.stop();
 			if(mode == 3) {
 				AnimCase anim = new AnimCase(listeCase.get((y - 1) * 10 + x), JeuModel.getGridDroite());
+				listeCase.get((y - 1) * 10 + x).setValue(3);
 			}
 			else if(mode == 4) {
 				AnimRadar radar = new AnimRadar(listeCase.get((y - 1) * 10 + x), PlateauView.getListeDroite(), JeuView.gridDroite);
@@ -92,8 +94,12 @@ public class AnimArtillerie {
 						}
 					  
 					for(int i = 0; i < 10; i++) {
-					
-						listeCase.get(y * 10 + i).getButton().setIcon(fond);
+						if (listeCase.get(y * 10 + i).getValue() == 3) {
+					  		listeCase.get((y - 1)*10 + 10+ i).getButton().setIcon(splash);
+					  	}
+						else {
+							listeCase.get(y * 10 + i).getButton().setIcon(fond);
+						}			
 					}
 					
 					y = (y + 1) % 10;
@@ -113,8 +119,8 @@ public class AnimArtillerie {
 									
 						  	x = i;
 						  	
-							listeCase.get((y - 1)*10 + i).getButton().setBackground(Color.red);
-							listeCase.get((y - 1)*10 + i).getButton().setIcon(cible);
+						  	listeCase.get((y - 1)*10 + i).getButton().setIcon(cible);
+
 							Thread.sleep(300);
 							listeCase.get((y - 1)*10 + i).getButton().setBackground(new Color(22, 26, 63));
 							listeCase.get((y - 1)*10 + i).getButton().setIcon(fond);
