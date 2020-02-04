@@ -1,7 +1,7 @@
 package View;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JButton
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -30,25 +30,24 @@ public class JeuView extends JFrame {
 	public static int gridDroite[][];
 	public Bot bot;
 	public PlateauView plateauView1,plateauView2;
-	public ShipView ship,ship2,ship3,ship4,ship5;
+	public ShipView ship,ship2,ship3,ship4,ship5,ship6,ship7,ship8,ship9,ship10;
 	private JLabel prompteur;
 	private String textPrompteur;
 	private int nbJoueur;
 	public static int mode;
 	private static JButton bouton;
-	
+	private int posXPremiereGrille;
 	
 	public JeuView(int nbJoueur, int mode) {
 		this.setSize(width, height);
 		this.setLayout(null);
-		
+
 		this.nbJoueur = nbJoueur;
 		this.mode = mode;
 
 		gridGauche = new int[10][10];
 		gridDroite = new int[10][10];
-		gridDroite[0][0] = 6;
-		gridDroite[0][1] = 6;
+		gridDroite[0][9] = 7;
 		/*gridDroite[0][1] = 1;
 		gridDroite[0][2] = 1;
 		gridDroite[5][5] = 1;*/
@@ -63,34 +62,56 @@ public class JeuView extends JFrame {
 		bouton = new JButton(clic0);
 		bouton.setBounds(500 , 100, 200, 45);
 		
-
-		background = new JLabel("", imgBackground1Joueur, JLabel.CENTER);
+		if (nbJoueur==1) {
+			background = new JLabel("", imgBackground1Joueur, JLabel.CENTER);
+			ship = new ShipView("/petit-bateau-debout.png", "/petit-bateau-couche.png",2,-10+3*width/28,(height/4));
+	        add(ship);
+	        ship2 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3,-10+3*width/28,3*(width/28)+(height/4));
+	        add(ship2);
+	        ship3 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3,-10+3*width/28,7*(width/28)+(height/4));
+	        add(ship3);
+	        ship4 = new ShipView("/sous-marin-debout.png", "/sous-marin-couche.png",4,10+width/28,(height/4));
+	        add(ship4);
+	        ship5 = new ShipView("/porte-avion-debout.png", "/porte-avion-couche.png",5,10+width/28,5*(width/28)+(height/4));
+	        add(ship5);
+		}else {
+			background = new JLabel("", imgBackground2Joueur, JLabel.CENTER);
+			ship = new ShipView("/petit-bateau-debout.png", "/petit-bateau-couche.png",2,-20+2*width/28,(height/4));
+	        add(ship);
+	        ship2 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3,-20+2*width/28,3*(width/28)+(height/4));
+	        add(ship2);
+	        ship3 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3,-20+2*width/28,7*(width/28)+(height/4));
+	        add(ship3);
+	        ship4 = new ShipView("/sous-marin-debout.png", "/sous-marin-couche.png",4,20,(height/4));
+	        add(ship4);
+	        ship5 = new ShipView("/porte-avion-debout.png", "/porte-avion-couche.png",5,20,5*(width/28)+(height/4));
+	        add(ship5);
+			ship6 = new ShipView("/petit-bateau-debout.png", "/petit-bateau-couche.png",2,width-(width/28)-(-20+2*width/28),(height/4));
+	        add(ship6);
+	        ship7 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3,width-(width/28)-(-20+2*width/28),3*(width/28)+(height/4));
+	        add(ship7);
+	        ship8 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3,width-(width/28)-(-20+2*width/28),7*(width/28)+(height/4));
+	        add(ship8);
+	        ship8 = new ShipView("/sous-marin-debout.png", "/sous-marin-couche.png",4,width-(width/28)-(20),(height/4));
+	        add(ship8);
+	        ship9 = new ShipView("/porte-avion-debout.png", "/porte-avion-couche.png",5,width-(width/28)-(20),5*(width/28)+(height/4));
+	        add(ship9);
+		}
 		background.setBounds(0,0, width, height);
-		
-		ship = new ShipView("/petit-bateau-debout.png", "/petit-bateau-couche.png",2);
-		ship.setBounds(-10+3*width/28,(height/4),5+(width/28), 5+(2*width/28));
-        add(ship);
-        ship2 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3);
-        ship2.setBounds(-10+3*width/28,3*(width/28)+(height/4),5+(width/28), 5+(3*width/28));
-        add(ship2);
-        ship3 = new ShipView("/cuirasee-debout.png", "/cuirasee-couche.png",3);
-        ship3.setBounds(-10+3*width/28,7*(width/28)+(height/4),5+(width/28), 5+(3*width/28));
-        add(ship3);
-        ship4 = new ShipView("/sous-marin-debout.png", "/sous-marin-couche.png",4);
-        ship4.setBounds(10+width/28,(height/4),5+(width/28), 5+(4*width/28));
-        add(ship4);
-        ship5 = new ShipView("/porte-avion-debout.png", "/porte-avion-couche.png",5);
-        ship5.setBounds(10+width/28,5*(width/28)+(height/4),5+(width/28), 5+(5*width/28));
-        add(ship5);
-
         
         plateauView1 = new PlateauView(20,20, gridGauche, true);
 		add(plateauView1);
 		plateauView2 = new PlateauView(width*3/5,height*1/3, gridDroite, false);
 		add(plateauView2);
-
-		plateauView1.setBounds(width/5, height/4, 10*width/28, 10*width/28); //modifie la taille du comteneur de la grille doit etre egale a la taille de la grille
-		plateauView2.setBounds((width/5)+(11*width/28), height/4, 10*width/28, 10*width/28);
+		if(nbJoueur==1) {
+			plateauView1.setBounds(width/5, height/4, 10*width/28, 10*width/28); //modifie la taille du comteneur de la grille doit etre egale a la taille de la grille
+			plateauView2.setBounds((width/5)+(11*width/28), height/4, 10*width/28, 10*width/28);
+			posXPremiereGrille=width/5;
+		}else {
+			plateauView1.setBounds(width/8, height/4, 10*width/28, 10*width/28); //modifie la taille du comteneur de la grille doit etre egale a la taille de la grille
+			plateauView2.setBounds((width/8)+(11*width/28), height/4, 10*width/28, 10*width/28);
+			posXPremiereGrille=width/8;
+		}
 		
 		bot = new Bot();	
 		
@@ -101,17 +122,13 @@ public class JeuView extends JFrame {
 
 		this.setUndecorated(true);
 		this.setVisible(true);
-		JeuModel jeu = new JeuModel(gridGauche, gridDroite);
+		JeuModel jeu = new JeuModel(gridGauche, gridDroite, posXPremiereGrille);
 		JeuController controlJeu = new JeuController(this, jeu);
 
 	}
 
 	public JLabel getPrompteur() {
 		return prompteur;
-	}
-	
-	public JButton getBouton() {
-		return bouton;
 	}
 
 	public void setPrompteur(String text) {
