@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import View.JeuView;
+import View.PlateauView;
+
 public class AnimArtillerie {
 	private JButton bouton;
 	private int tempo = 0;
@@ -20,9 +23,12 @@ public class AnimArtillerie {
 	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public int width = (int)screenSize.getWidth();
 	public int height = (int)screenSize.getHeight();
+	private int mode;
 	
-	public AnimArtillerie(ArrayList<Case> listeCase) {
+	public AnimArtillerie(ArrayList<Case> listeCase, int mode) {
 		this.listeCase = listeCase;
+		this.mode = mode;
+		
 		bouton = new JButton();
 		bouton.setBounds(500 , 100, 200, 50);
 
@@ -36,7 +42,6 @@ public class AnimArtillerie {
 	}
 	
 	public void cible() {
-		System.out.println("marche" + tempo);
 		if(tempo == 0) {
 			tempo = 1;
 			thread = new Thread(t1);
@@ -49,7 +54,12 @@ public class AnimArtillerie {
 		else {
 			tempo = 0;
 			thread.stop();
-			AnimCase anim = new AnimCase(listeCase.get((y - 1) * 10 + x), JeuModel.getGridDroite());
+			if(mode == 3) {
+				AnimCase anim = new AnimCase(listeCase.get((y - 1) * 10 + x), JeuModel.getGridDroite());
+			}
+			else if(mode == 4) {
+				AnimRadar radar = new AnimRadar(listeCase.get((y - 1) * 10 + x), PlateauView.getListeDroite(), JeuView.gridDroite);
+			}
 			for(int i = 0; i < 10; i++) {
 				/*System.out.println(listeCase);
 				System.out.println(" y = " + y);
@@ -102,6 +112,7 @@ public class AnimArtillerie {
 					  for(int i = 0; i < 10; i++) {
 									
 						  	x = i;
+						  	
 							listeCase.get((y - 1)*10 + i).getButton().setBackground(Color.red);
 							listeCase.get((y - 1)*10 + i).getButton().setIcon(cible);
 							Thread.sleep(300);

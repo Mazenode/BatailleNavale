@@ -1,7 +1,7 @@
 package View;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -47,7 +47,8 @@ public class JeuView extends JFrame {
 
 		gridGauche = new int[10][10];
 		gridDroite = new int[10][10];
-		gridDroite[0][9] = 7;
+		gridDroite[0][0] = 7;
+		gridDroite[0][1] = 7;
 		/*gridDroite[0][1] = 1;
 		gridDroite[0][2] = 1;
 		gridDroite[5][5] = 1;*/
@@ -130,6 +131,10 @@ public class JeuView extends JFrame {
 	public JLabel getPrompteur() {
 		return prompteur;
 	}
+	
+	public static JButton getBouton() {
+		return bouton;
+	}
 
 	public void setPrompteur(String text) {
 		prompteur.setText(text);
@@ -150,9 +155,5 @@ public class JeuView extends JFrame {
 
 	public int getNbJoueur() {
 		return this.nbJoueur;
-	}
-	
-	public static JButton getArtillerie() {
-		return bouton;
 	}
 }

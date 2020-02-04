@@ -44,15 +44,22 @@ public class JeuController implements KeyListener {
 		 * ShipController.placeShip=false; model.printGrille(); } } } }));
 		 */
 		
-		if (view.mode == 3) {
+		if(view.mode == 1 || view.mode== 2) {
+			this.view.addKeyListener(this);
+			PlateauView.getListeDroite().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n)));
+		}
+		else if (view.mode == 3) {
 			view.add(view.getBouton());
 			view.getBouton().addActionListener(event -> view.getBouton().setVisible(false) );
-			clickArtillerie();
+			clickArtillerie(3);
 		}
-
-		this.view.addKeyListener(this);
-		PlateauView.getListeDroite().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n)));
-		 
+		
+		else if (view.mode == 4) {
+			view.add(view.getBouton());
+			view.getBouton().addActionListener(event -> view.getBouton().setVisible(false) );
+			clickArtillerie(4);
+		}
+ 
 	}
 
 	public void setTab(Case caseCase) {
@@ -114,8 +121,8 @@ public class JeuController implements KeyListener {
 		AnimRadar radar = new AnimRadar(caseCase, PlateauView.getListeDroite(), view.gridDroite);
 	}
 	
-	public void clickArtillerie() {
-		AnimArtillerie anim = new AnimArtillerie(PlateauView.getListeDroite());
+	public void clickArtillerie(int mode) {
+		AnimArtillerie anim = new AnimArtillerie(PlateauView.getListeDroite(), mode);
 		view.add(anim.getButton());
 	}
 
