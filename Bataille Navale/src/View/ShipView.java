@@ -23,10 +23,11 @@ public class ShipView extends JPanel{
 	private ImageIcon imgShip, imgShipTurn;
 	public JLabel drawShip;
 	
-	public ShipView(String spriteShip, String spriteShipTurn, int longueur){
+	public ShipView(String spriteShip, String spriteShipTurn, int longueur, int posX, int posY){
 		this.setVisible(true);
 		this.setLayout(null);
 		this.setOpaque(false);
+		this.setBounds(posX,posY,5+(width/28), 5+(longueur*width/28));
 		/* on récupère les images qu'on mets dans des ImageIcon */
 		imgShip = new ImageIcon(new ImageIcon(this.getClass().getResource(spriteShip)).getImage().getScaledInstance(width/28,longueur*width/28, Image.SCALE_DEFAULT));
 		imgShipTurn = new ImageIcon(new ImageIcon(this.getClass().getResource(spriteShipTurn)).getImage().getScaledInstance(longueur*width/28,width/28, Image.SCALE_DEFAULT));
@@ -37,6 +38,8 @@ public class ShipView extends JPanel{
         this.add(drawShip);
         ShipModel ship = new ShipModel(this, idShip, longueur, imgShip, imgShipTurn);
         ShipController shipcontrol = new ShipController(this, ship,5+(width/28), 5+(longueur*width/28),idShip);
+        shipcontrol.defaultPosX=posX;
+        shipcontrol.defaultPosY=posY;
         idShip+=1;
 	}
 }
