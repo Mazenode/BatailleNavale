@@ -26,20 +26,26 @@ public class AnimRadar {
 
 		// Permet d'eviter de repeindre les cases déja touchées
 
-		listeCase.get(1).setValue(1);
-		grid[0][1] = 1;
 
-		for (int j = 0; j < 100; j++) {
+		System.out.println("la valeur = " + grid[caseCase.getX()][caseCase.getY()]);
+		if (grid[caseCase.getX()][caseCase.getY()] > 5) {
+			caseCase.setValue(1);
+			System.out.println("C'est bon !");
+		}
+		
+		System.out.println("valeur de la case = " + caseCase.getValue());
+		
+		/*for (int j = 0; j < 100; j++) {
 			if (j % 10 == 0) {
 				System.out.println("");
 			}
 			System.out.print(" " + PlateauView.getListeDroite().get(j).getValue());
 
-		}
+		}*/
 
 		// setCase();
 
-		if (caseCase.getValue() == 1) {
+		if(caseCase.getValue() == 1) {
 			AnimCase anim = new AnimCase(caseCase, grid);
 		} else {
 			propa();
@@ -56,7 +62,7 @@ public class AnimRadar {
 				if (posY + 10 * i >= 0 && posY + 10 * i <= 90) {
 					if (posX + j >= 0 && posX + j <= 9) {
 						if (listeCase.get(caseTraitee).getValue() == 1) {
-							AnimCase animCase = new AnimCase(caseCase, grid);
+							
 							detected = true;
 						}
 					}
@@ -71,7 +77,6 @@ public class AnimRadar {
 						int caseTraitee = posX + posY + (10 * i) + j;
 						if (posY + 10 * i >= 0 && posY + 10 * i <= 90) {
 							if (posX + j >= 0 && posX + j <= 9) {
-
 								radarIcon.getImage().flush();
 								listeCase.get(caseTraitee).getButton().setIcon(radarIcon);
 

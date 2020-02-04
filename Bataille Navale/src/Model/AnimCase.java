@@ -1,13 +1,6 @@
 package Model;
 
-import java.awt.Color;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
-
-import Main.Main;
 
 public class AnimCase {
 	private ImageIcon explosion = new ImageIcon(this.getClass().getResource("/explosion.gif"));
@@ -16,8 +9,8 @@ public class AnimCase {
 
 	public AnimCase(Case caseCase, int grid[][]) {
 		this.grid = grid;
-		
-            if(grid[caseCase.getX()][caseCase.getY()] == 1) {
+
+            if(grid[caseCase.getX()][caseCase.getY()] >= 5) {
             	grid[caseCase.getX()][caseCase.getY()] = 2;
     			explosion.getImage().flush();
     			caseCase.getButton().setIcon(explosion);

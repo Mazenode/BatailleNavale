@@ -3,6 +3,7 @@ package View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
@@ -15,11 +16,11 @@ public class SousMenuView extends JFrame{
     int height = (int)screenSize.getHeight();
     private int posX = width/2 - width/10;
     private int posY = height/4;
-	private ImageIcon imgBackground = new ImageIcon(this.getClass().getResource("/sous-menu-basique.png"));
-	private ImageIcon imgMode1 = new ImageIcon(this.getClass().getResource("/bouton-mode-1.png"));
-	private ImageIcon imgMode2 = new ImageIcon(this.getClass().getResource("/bouton-mode-2.png"));
-	private ImageIcon imgMode3 = new ImageIcon(this.getClass().getResource("/bouton-mode-3.png"));
-	private ImageIcon imgMode4 = new ImageIcon(this.getClass().getResource("/bouton-mode-4.png"));
+	private ImageIcon imgBackground = new ImageIcon(new ImageIcon(this.getClass().getResource("/sous-menu-basique.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgMode1 = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-1.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
+	private ImageIcon imgMode2 = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-2.png")).getImage().getScaledInstance(2*width/9,height/12, Image.SCALE_DEFAULT));
+	private ImageIcon imgMode3 = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-3.png")).getImage().getScaledInstance(2*width/9,height/12, Image.SCALE_DEFAULT));
+	private ImageIcon imgMode4 = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-4.png")).getImage().getScaledInstance(2*width/9,height/12, Image.SCALE_DEFAULT));
 	private JLabel bg, mode1, mode2, mode3, mode4, popUp, text;
 	
 	public SousMenuView() {
@@ -29,29 +30,29 @@ public class SousMenuView extends JFrame{
 		this.setUndecorated(true);
 		
 		mode1 = new JLabel(imgMode1);
-		mode1.setBounds(posX, posY,370,85);
+		mode1.setBounds(posX, posY,2*width/9, height/12);
 		add(mode1);
 		
 		mode2 = new JLabel(imgMode2);
-		mode2.setBounds(posX, posY + 90,370,85);
+		mode2.setBounds(posX, posY +5+ height/12,2*width/9,height/12);
 		add(mode2);
 		
 		mode3 = new JLabel(imgMode3);
-		mode3.setBounds(posX, posY + 180,370,85);
+		mode3.setBounds(posX, posY +10+ 2*height/12,2*width/9,height/12);
 		add(mode3);
 		
 		mode4 = new JLabel(imgMode4);
-		mode4.setBounds(posX, posY + 270,370,85);
+		mode4.setBounds(posX, posY +15+ 3*height/12,2*width/9,height/12);
 		add(mode4);
 		
 		text = new JLabel();
 		text.setForeground(Color.white);
-		text.setFont(new Font("Arial", Font.BOLD, 25));
-		text.setBounds(posX - posX/3, posY*2 + posY/2 - posY/9, 1100,500);
+		text.setFont(new Font("Arial", Font.BOLD, width/80));
+		text.setBounds(posX - posX/3, posY*2 + posY/2 - posY/9, 16*width/11,height/2);
 		add(text);
 		
 		popUp = new JLabel();
-		popUp.setBounds(posX - posX/2 + posX/60, posY*2 + posY/6, 1100,500);
+		popUp.setBounds(posX - posX/2 + posX/60, posY*2 + posY/6, 16*width/11,height/2);
 		add(popUp);
 		
 		bg = new JLabel(imgBackground);

@@ -1,13 +1,11 @@
 package Model;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
-import View.JeuView;
-import View.PlateauView;
 
 public class AnimArtillerie {
 	private JButton bouton;
@@ -19,16 +17,18 @@ public class AnimArtillerie {
 	private ArrayList<Case> listeCase;
 	private ImageIcon cible = new ImageIcon(this.getClass().getResource("/cible.png"));
 	private ImageIcon fond = new ImageIcon(this.getClass().getResource("/artillerie.png"));
+	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public int width = (int)screenSize.getWidth();
+	public int height = (int)screenSize.getHeight();
 	
 	public AnimArtillerie(ArrayList<Case> listeCase) {
 		this.listeCase = listeCase;
 		bouton = new JButton();
 		bouton.setBounds(500 , 100, 200, 50);
+
+		t1 = new tt();
 		
 		bouton.addActionListener(event -> cible());
-		
-		t1 = new tt();
-		thread = new Thread(t1);
 		}
 	
 	public JButton getButton() {
@@ -36,10 +36,10 @@ public class AnimArtillerie {
 	}
 	
 	public void cible() {
-		
+		System.out.println("marche" + tempo);
 		if(tempo == 0) {
 			tempo = 1;
-			
+			thread = new Thread(t1);
 			thread.start();
 
 		}
@@ -47,14 +47,20 @@ public class AnimArtillerie {
 			tempo = 2;
 		}
 		else {
+			tempo = 0;
 			thread.stop();
-			AnimCase anim = new AnimCase(listeCase.get((y - 1) * 10 + x), JeuView.getListeDroite());
+			AnimCase anim = new AnimCase(listeCase.get((y - 1) * 10 + x), JeuModel.getGridDroite());
 			for(int i = 0; i < 10; i++) {
-				if(listeCase.get(i + (y - 1) *10).getButton().getIcon().equals(fond)) {
-					listeCase.get(i + (y - 1) *10).getButton().setIcon(null);
+				/*System.out.println(listeCase);
+				System.out.println(" y = " + y);
+				System.out.println(" i = " + i);*/
+				if(listeCase.get(i + (y - 1) *10).getButton().getIcon() != null) {
+					if(listeCase.get(i + (y - 1) *10).getButton().getIcon().equals(fond)) {
+						listeCase.get(i + (y - 1) *10).getButton().setIcon(null);
+					}
 				}
-				
 			}
+			
 		}	
 	}
 	
@@ -102,6 +108,7 @@ public class AnimArtillerie {
 							listeCase.get((y - 1)*10 + i).getButton().setBackground(new Color(22, 26, 63));
 							listeCase.get((y - 1)*10 + i).getButton().setIcon(fond);
 						}
+					 
 				
 					
 				} catch (InterruptedException e) {
@@ -113,4 +120,3 @@ public class AnimArtillerie {
 		
 	}
 }
-

@@ -1,12 +1,19 @@
 package Model;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 public class SousMenuModel {
-	private ImageIcon imgMode1Active = new ImageIcon(this.getClass().getResource("/bouton-mode-1-active.png"));
-	private ImageIcon imgMode2Active = new ImageIcon(this.getClass().getResource("/bouton-mode-2-active.png"));
-	private ImageIcon imgMode3Active = new ImageIcon(this.getClass().getResource("/bouton-mode-3-active.png"));
-	private ImageIcon imgMode4Active = new ImageIcon(this.getClass().getResource("/bouton-mode-4-active.png"));
+	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int width = (int)screenSize.getWidth();
+    int height = (int)screenSize.getHeight();
+	private ImageIcon imgMode1Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-1-active.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
+	private ImageIcon imgMode2Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-2-active.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
+	private ImageIcon imgMode3Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-3-active.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
+	private ImageIcon imgMode4Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-4-active.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
 	private ImageIcon imgPopUp = new ImageIcon(this.getClass().getResource("/pop-up.png"));
 	private String modeExplication1 = "<html>Chaque joueur essaye de deviner la position des navires ennemis et\r\n" + 
 			" tenter <br/>de les couler.</html>";

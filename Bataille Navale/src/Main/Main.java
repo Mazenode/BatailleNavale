@@ -26,7 +26,7 @@ public class Main {
 		
 		//Sound.playSound("/battlefield-1942-theme.wav");
 
-		JeuView jeuView = new JeuView(2);
+		JeuView jeuView = new JeuView(1, 3);
 		
 		/*JeuModel jeuModel = new JeuModel();
 		

@@ -11,5 +11,5 @@ import Model.PlateauModel;
 import View.PlateauView;
 
 public class PlateauController {
-	
+	/* à supprimer */
 }

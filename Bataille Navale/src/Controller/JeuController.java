@@ -1,7 +1,12 @@
 package Controller;
 
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
 
 import Model.AnimArtillerie;
 import Model.AnimCase;
@@ -12,10 +17,11 @@ import Model.Sound;
 import View.JeuView;
 import View.PlateauView;
 
-public class JeuController {
+public class JeuController implements KeyListener {
 	private JeuView view;
 	private JeuModel model;
 	private boolean turnPlayer;
+	private JButton bouton;
 
 	public JeuController(JeuView view, JeuModel model) {
 		this.view = view;
@@ -37,13 +43,16 @@ public class JeuController {
 		 * == 0) { view.gridGauche[n.getX()][n.getY()] = 1;
 		 * ShipController.placeShip=false; model.printGrille(); } } } }));
 		 */
+		
+		if (view.mode == 3) {
+			view.add(view.getBouton());
+			view.getBouton().addActionListener(event -> view.getBouton().setVisible(false) );
+			clickArtillerie();
+		}
 
-		AnimArtillerie anim = new AnimArtillerie(PlateauView.getListeDroite());
-		view.add(anim.getButton());
-
-		// PlateauView.getListeDroite().forEach((n) ->
-		// n.getButton().addActionListener(event -> caseClick(n)));
-
+		this.view.addKeyListener(this);
+		PlateauView.getListeDroite().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n)));
+		 
 	}
 
 	public void setTab(Case caseCase) {
@@ -57,7 +66,7 @@ public class JeuController {
 		// will change complete to false
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (tab[i][j] == 1 || tab[i][j] == 2 || tab[i][j] == 3 || tab[i][j] == 0) {
+				if (tab[i][j] > 2) {
 					complete = false;
 				}
 			}
@@ -66,15 +75,16 @@ public class JeuController {
 	}
 
 	private void caseClick(Case caseCase) {
-
+		
 		if (turnPlayer == true) {
-			if (view.getNbJoueur() == 1) {
+			if (view.mode == 1) {
 				clickAnim(caseCase);
 			} 
-			else if (view.getNbJoueur() == 2) {
-				clickAnim(caseCase);
-				// clickRadar(caseCase);
+			else if (view.mode == 2) {
+				clickRadar(caseCase);
 			}
+			
+			
 
 			checkTurn();
 
@@ -101,15 +111,41 @@ public class JeuController {
 	}
 
 	public void clickRadar(Case caseCase) {
-
 		AnimRadar radar = new AnimRadar(caseCase, PlateauView.getListeDroite(), view.gridDroite);
+	}
+	
+	public void clickArtillerie() {
+		AnimArtillerie anim = new AnimArtillerie(PlateauView.getListeDroite());
+		view.add(anim.getButton());
 	}
 
 	public void checkTurn() {
 		if (isBoardComplete(view.gridDroite)) {
 			view.finish();
+			
 		} else {
 			setTimeout(() -> view.bot.playMove(), 1500);
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			this.view.setVisible(false);
+			System.exit(0);
+			
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

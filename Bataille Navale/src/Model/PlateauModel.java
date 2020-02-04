@@ -5,7 +5,7 @@ public class PlateauModel {
 	
 	public PlateauModel() {
 		tab = new int[10][10];
-		
+		/* à supprimer */
 	}
 	
 }

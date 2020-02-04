@@ -1,5 +1,8 @@
 package Model;
 
+/* à supprimer ? */
+
+
 public class Navire {
 	public int []Coord = new int[2] ;
 	public String NomNavir;

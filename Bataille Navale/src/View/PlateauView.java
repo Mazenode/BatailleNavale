@@ -38,7 +38,7 @@ public class PlateauView extends JPanel {
        this.tab = tab;
         
         p.setLayout(new GridLayout(SIZE, SIZE));
-        p.setPreferredSize(new Dimension(700,700)); // taille de la grille 
+        p.setPreferredSize(new Dimension(10*width/28,10*width/28)); // taille de la grille 
         for (int j = 0; j < SIZE * SIZE; j++) { // permet de mettre les 100 bouttons
             JButton button = new JButton();
             button.setBackground(new Color (23,26,63));
@@ -53,6 +53,7 @@ public class PlateauView extends JPanel {
             }
             p.add(button);
             add(p);
+            this.setBackground(new Color (217,217,216));
         }
     }
     

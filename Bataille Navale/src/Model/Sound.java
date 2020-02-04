@@ -17,12 +17,12 @@ public class Sound {
 		          Main.class.getResourceAsStream(url));
 		        clip.open(inputStream);
 		        clip.start();
-		        
-		        
+
+	        
 		      } catch (Exception e) {
 		        System.err.println(e.getMessage());
 		      }
 		  
 		}
-	
+
 }

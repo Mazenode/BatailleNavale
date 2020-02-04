@@ -1,25 +1,33 @@
 package Controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-//import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.MouseInfo;
-//import java.awt.event.KeyEvent;
-//import java.awt.event.KeyAdapter;
+import java.awt.Toolkit;
 
 import Model.ShipModel;
 import View.ShipView;
-//import javax.swing.ImageIcon;
+import Model.JeuModel;
 
 public class ShipController extends MouseAdapter{
-	private ShipView view;
-	private ShipModel model;
-	public static boolean moveShip, placeShip;
-	private boolean turnShip;
+	public ShipView view;
+	public ShipModel model;
+	public ShipController control;
+	public boolean moveShip;
+	public boolean turnShip=true;
+	public int defaultPosX, defaultPosY;
+	public int longueurShip, oldLongueur, hauteurShip, idShip;
+	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    public int width = (int)screenSize.getWidth();
+    public int height = (int)screenSize.getHeight();
 	
-	public ShipController(ShipView view, ShipModel model, int longueurShip, int hauteurShip) {
+	public ShipController(ShipView view, ShipModel model, int longueurShip, int hauteurShip, int idShip) {
 		this.model = model;
 		this.view = view;
-		placeShip=false;
+		this.control=this;
+		this.idShip = idShip;
+		this.longueurShip=longueurShip;
+		this.hauteurShip=hauteurShip;
 		
 		view.setVisible(true);
 		/* boolean qui permet de bouger les bateaux */
@@ -31,15 +39,30 @@ public class ShipController extends MouseAdapter{
 				/* si clique Gauche sur un bateau : on permet (ou annule) le droit de le déplacer */
 				if(e.getButton() == MouseEvent.BUTTON1) {
 					moveShip = (moveShip==false)? true : false;
+					/* si on le pose, on va le set dans la grille */
 					if(moveShip==false) {
-						placeShip=true;
+						/* on identifie la où placer le bateau */
+						JeuModel.setBateaux((int)MouseInfo.getPointerInfo().getLocation().getX(), (int)MouseInfo.getPointerInfo().getLocation().getY(), control);
+						/* on le place aux coordonnées définit */
+						if(turnShip) {
+							view.setBounds(defaultPosX,defaultPosY,longueurShip,hauteurShip);
+						}else {
+							view.setBounds(defaultPosX,defaultPosY,hauteurShip,longueurShip);
+						}
 					}
 				}else{
 					/* si clique Droit sur un bateau : on le rotate */
 					if(e.getButton() == MouseEvent.BUTTON3) {
 						if(moveShip==true) {
-							model.turnShip();
-							//view.getShipLabel().setIcon(model.getShipTurn());
+							turnShip = (turnShip==false)? true : false;
+							/* on rotate le bateau */
+							model.changeShip(turnShip, longueurShip, hauteurShip);
+							/* on replace le nouveau bateau */
+							if(turnShip) {
+								view.setBounds((int)MouseInfo.getPointerInfo().getLocation().getX()-longueurShip/2,(int)MouseInfo.getPointerInfo().getLocation().getY()-hauteurShip*(1)/(2*model.longueur),longueurShip,hauteurShip);
+							}else {
+								view.setBounds((int)MouseInfo.getPointerInfo().getLocation().getX()-hauteurShip*(1)/(2*model.longueur),(int)MouseInfo.getPointerInfo().getLocation().getY()-longueurShip/2,hauteurShip,longueurShip);
+							}
 						}
 					}
 				}
@@ -49,21 +72,22 @@ public class ShipController extends MouseAdapter{
 		view.addMouseMotionListener(new MouseAdapter(){
 			public void mouseMoved(MouseEvent e){
 				if(moveShip==true){
-					view.setBounds((int)MouseInfo.getPointerInfo().getLocation().getX()-longueurShip*(1)/(2*model.longueur),(int)MouseInfo.getPointerInfo().getLocation().getY()-hauteurShip/2,longueurShip,hauteurShip);
+					if(turnShip) {
+						view.setBounds((int)MouseInfo.getPointerInfo().getLocation().getX()-longueurShip/2,(int)MouseInfo.getPointerInfo().getLocation().getY()-hauteurShip*(1)/(2*model.longueur),longueurShip,hauteurShip);
+					}else {
+						view.setBounds((int)MouseInfo.getPointerInfo().getLocation().getX()-hauteurShip*(1)/(2*model.longueur),(int)MouseInfo.getPointerInfo().getLocation().getY()-longueurShip/2,hauteurShip,longueurShip);
+					}
+				}
+			}
+			public void mouseExited(MouseEvent e){
+				if(moveShip==true){
+					if(turnShip) {
+						view.setBounds((int)MouseInfo.getPointerInfo().getLocation().getX()-longueurShip/2,(int)MouseInfo.getPointerInfo().getLocation().getY()-hauteurShip*(1)/(2*model.longueur),longueurShip,hauteurShip);
+					}else {
+						view.setBounds((int)MouseInfo.getPointerInfo().getLocation().getX()-hauteurShip*(1)/(2*model.longueur),(int)MouseInfo.getPointerInfo().getLocation().getY()-longueurShip/2,hauteurShip,longueurShip);
+					}
 				}
 			}
 		});	
-		
-		/* code qui marche pas : (keyListener) */
-		
-		/*view.getShipLabel().addKeyListener(new KeyAdapter(){
-			public void keyPressed(KeyEvent e){
-				System.out.println(e.getKeyCode());
-				if (e.getKeyCode() == KeyEvent.VK_R) {
-					System.out.println("nullllos");
-					view.getShipLabel().setIcon(model.getShipTurn());
-				}
-			}
-		});*/
 	}
 }

@@ -1,5 +1,9 @@
 package View;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.*;
 
 public class MenuPrincipalView extends JFrame {
@@ -15,37 +19,39 @@ public class MenuPrincipalView extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int x = 1366;
-	private int y = 768;
-	private ImageIcon imgBackground = new ImageIcon(this.getClass().getResource("/menu.png"));
-	private ImageIcon imgDemoPasActif = new ImageIcon(this.getClass().getResource("/demo_pas_active.png"));
-	private ImageIcon imgJ1pasActif = new ImageIcon(this.getClass().getResource("/joueur1_pas_active.png"));
-	private ImageIcon imgJ2pasActif = new ImageIcon(this.getClass().getResource("/joueur2_pas_active.png"));
+	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	int width = (int)screenSize.getWidth();
+	int height = (int)screenSize.getHeight();
+	
+	private ImageIcon imgBackground = new ImageIcon(new ImageIcon(this.getClass().getResource("/menu.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgDemoPasActif = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_pas_active.png")).getImage().getScaledInstance(2*width/8, height/10, Image.SCALE_DEFAULT));
+	private ImageIcon imgJ1pasActif = new ImageIcon(new ImageIcon(this.getClass().getResource("/joueur1_pas_active.png")).getImage().getScaledInstance(2*width/8, height/10, Image.SCALE_DEFAULT));
+	private ImageIcon imgJ2pasActif = new ImageIcon(new ImageIcon(this.getClass().getResource("/joueur2_pas_active.png")).getImage().getScaledInstance(2*width/8, height/10, Image.SCALE_DEFAULT));
 	
 	private JLabel background, boutonDemo, boutonJ1, boutonJ2;
 
 	public MenuPrincipalView(){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(x, y);
+		this.setSize(width,height);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
 	
 		
 		boutonDemo = new JLabel(imgDemoPasActif);
-		boutonDemo.setBounds(736,530,441,90);
+		boutonDemo.setBounds(3*width/8,6*height/12,2*width/8,height/10);
 		add(boutonDemo);
 		
 		boutonJ1 = new JLabel(imgJ1pasActif);
-		boutonJ1.setBounds(736,650,441,90);
+		boutonJ1.setBounds(3*width/8,8*height/12,2*width/8,height/10);
 		add(boutonJ1);
 		
 		boutonJ2 = new JLabel(imgJ2pasActif);
-		boutonJ2.setBounds(736,775,441,90);
+		boutonJ2.setBounds(3*width/8,10*height/12,2*width/8,height/10);
 		add(boutonJ2);
 		
 
 		background = new JLabel("", imgBackground, JLabel.CENTER);
-		background.setBounds(0,0,x,y);
+		background.setBounds(0,0,width,height);
 		add(background);
 		
 		

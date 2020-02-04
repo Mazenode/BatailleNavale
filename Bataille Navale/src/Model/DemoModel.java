@@ -1,20 +1,27 @@
 package Model;
 
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 public class DemoModel {
+	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	int width = (int)screenSize.getWidth();
+	int height = (int)screenSize.getHeight();
 	
 	/*Idem que pour Menu Principal, on commence à initialiser à partir de la deuxième image.*/
 	private ImageIcon blank = new ImageIcon();
-	private ImageIcon imgBackground2 = new ImageIcon(this.getClass().getResource("/demo_background2.png"));
-	private ImageIcon imgBackground3 = new ImageIcon(this.getClass().getResource("/demo_background3.png"));
-	private ImageIcon imgBackground4 = new ImageIcon(this.getClass().getResource("/demo_background4.png"));
-	private ImageIcon imgBackground5 = new ImageIcon(this.getClass().getResource("/demo_background5.png"));
-	private ImageIcon imgBackground6 = new ImageIcon(this.getClass().getResource("/demo_background6.png"));
-	private ImageIcon imgBackground7 = new ImageIcon(this.getClass().getResource("/demo_background7.png"));
-	private ImageIcon imgBackground8 = new ImageIcon(this.getClass().getResource("/demo_background8.png"));
-	private ImageIcon imgBackground9 = new ImageIcon(this.getClass().getResource("/demo_background9.png"));
-	private ImageIcon imgBackground10 = new ImageIcon(this.getClass().getResource("/demo_background10.png"));
+	private ImageIcon imgBackground2 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background2.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground3 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background3.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground4 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background4.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground5 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background5.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground6 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background6.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground7 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background7.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground8 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background8.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground9 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background9.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
+	private ImageIcon imgBackground10 = new ImageIcon(new ImageIcon(this.getClass().getResource("/demo_background10.png")).getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 	
 	public ImageIcon getImage(int i) {
 		switch(i) {
