@@ -1,113 +1,72 @@
 package View;
-
-import java.util.*;
+import java.awt.Color;
+import java.util.ArrayList;
 
 import Model.AnimCase;
 import Model.Case;
 import Model.JeuModel;
 
 public class Bot {
-	private static int valeur,d=0,x=0,i=0;
 	private ArrayList<Case> liste;
-	private static boolean floped = true;
-	private static boolean firsttry = true;
-	private static int randElement = 0;
-	private ArrayList<Integer> tir = new ArrayList<Integer>();
-	List<Integer> dirlist = new LinkedList<Integer>(Arrays.asList(-1,1,10,-10));
-
-	public Bot() {
+	private boolean toucher = false;
+	private int[]tir;
+	private Case toucheCase;
+	private int nextCase;
+	private int randomVal;
+	private int nbEssais = 0;
+	
+	public Bot(){
 		liste = PlateauView.getListeGauche();
+		tir = new int[100];
+		
+	
 	}
-
-	public int random() {
-		int x;
-		Random r = new Random();
-		//z = 0;//(int) (r.nextInt(y - 0));
-		d = getValeur();
-		x = (int) (50 + r.nextInt(80 - 50));
-		this.x = x;
-		System.out.println("Case : " + x);
-
-		return x;
-
+	
+	public int random() {		
+		return (int) (Math.random() * ( 0 + 99 ));
 	}
-
+	
 	public void playMove() {
-		if (firsttry){
-			if (floped){
-				valeur = random();
-				tirisok(valeur);
-			}
-			else {//si on touche on passe dans smartplay()
-				//System.out.println("smartplay()");
-				//System.out.println(getFloped());
-				valeur = smartplay();
-				tirisok(valeur);
-			}
+		System.out.println(nbEssais);
+		if(nbEssais < 1) {
+			randomVal = random();
+			AnimCase anim = new AnimCase(liste.get(randomVal), JeuModel.getGridGauche());
 		}
-		else{
-			valeur = smartplay();
-			tirisok(valeur);
+		else {
+			AnimCase anim = new AnimCase(liste.get(nextCase), JeuModel.getGridGauche());
 		}
-	}
-
-	public int smartplay(){
-		Random rand = new Random();
-		//List<Integer> dirlist = Arrays.asList(-1,1,10,-10);
-		System.out.println("floped: " + floped);
-		System.out.println("firsttry: " + firsttry);
-
-		if (!floped && !firsttry){//tant que l'on touche on continue dans cette direction
-			System.out.println("1er randElement :" + randElement + " d :" + d);
-			d+= randElement;
-			tirisok(d);
-			return d;
-			}
-		if (floped && !firsttry){//on atteint l'extremiter d'un bateau sans l'avoir detruit
-			System.out.println("2er randElement :" + randElement + "d :" + d);
-			randElement = dirlist.get(rand.nextInt(dirlist.size()));
-			d = this.x;
-			d+=randElement;
-			dirlist.remove(dirlist.indexOf(randElement));
-			System.out.println(dirlist);
-			tirisok(d);
-			return d;
-		}
-		randElement = dirlist.get(rand.nextInt(dirlist.size()));//premiere fois que l'on touche un bateau et on choisit une direction
-		System.out.println("element : "+randElement);
-		d = this.x;
-		d += randElement;
-		dirlist.remove(dirlist.indexOf(randElement));
-		tirisok(d);
-		if (firsttry){
-			firsttry = false;
-		}
-		return d;
-
-	}
-
-	public void tirisok(int v){
-		System.out.println("tirisok");
-		if (!tir.contains(v)) {
-			System.out.println("valeur : " + v);
-			tir.add(v);
-			AnimCase anim = new AnimCase(liste.get(v), JeuModel.getGridGauche());
-		}
-		else if (floped && firsttry){
-			playMove();
+		
+		System.out.println("ligne 398 " + liste.get(5).getValue());
+		
+		if(liste.get(randomVal).getValue() == 1) {
+			this.nbEssais++;
+			System.out.println(liste.get(randomVal).getValue());
+			System.out.println("test ?");
+			touche();
 		}
 	}
-
-
-	public static void setFloped(boolean t){
-		floped = t;
+	
+	public void touche() {
+		nextCase = randomVal + nbEssais();
 	}
-
-	public static boolean getFloped(){
-		return floped;
-	}
-
-	public static int getValeur(){
-		return valeur;
+	
+	public int nbEssais() {
+		if(randomVal +1 != 10 || randomVal +1 != 20|| randomVal +1 != 30|| randomVal +1 != 40 || randomVal +1 != 50|| randomVal +1 != 60|| randomVal +1 != 70|| randomVal +1 != 80|| randomVal +1 != 90) {			
+				return randomVal + 1;
+		}
+		if(randomVal -1 != 9 || randomVal -1 != 19|| randomVal -1 != 29|| randomVal -1 != 39 || randomVal -1 != 49|| randomVal -1 != 59|| randomVal -1 != 69|| randomVal -1 != 79|| randomVal -1 != 89) {
+			
+			return randomVal - 1;
+			
+		}
+			
+	
+		else if (nbEssais == 3) {
+			
+		}
+		else if (nbEssais == 4) {
+	
+		}
+		return -1;
 	}
 }

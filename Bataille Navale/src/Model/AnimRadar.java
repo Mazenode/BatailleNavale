@@ -25,13 +25,24 @@ public class AnimRadar {
 		this.grid = grid;
 
 		// Permet d'eviter de repeindre les cases déja touchées
-
-
-		System.out.println("la valeur = " + grid[caseCase.getX()][caseCase.getY()]);
-		if (grid[caseCase.getX()][caseCase.getY()] > 5) {
-			caseCase.setValue(1);
-			System.out.println("C'est bon !");
+		
+		System.out.println("x = " + caseCase.getX());
+		System.out.println("y = " + caseCase.getY());
+		
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				if(grid[i][j] > 5) {
+					listeCase.get(i * 10 + j).setValue(1);
+					System.out.println("C'est bon !");
+				}
+			}
 		}
+		
+		
+		
+			
+			
+		
 		
 		System.out.println("valeur de la case = " + caseCase.getValue());
 		
@@ -61,6 +72,7 @@ public class AnimRadar {
 				int caseTraitee = posX + posY + (10 * i) + j;
 				if (posY + 10 * i >= 0 && posY + 10 * i <= 90) {
 					if (posX + j >= 0 && posX + j <= 9) {
+						System.out.print(listeCase.get(caseTraitee).getValue());
 						if (listeCase.get(caseTraitee).getValue() == 1) {
 							
 							detected = true;
