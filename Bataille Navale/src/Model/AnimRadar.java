@@ -33,16 +33,9 @@ public class AnimRadar {
 			for(int j = 0; j < 10; j++) {
 				if(grid[i][j] > 5) {
 					listeCase.get(i * 10 + j).setValue(1);
-					System.out.println("C'est bon !");
 				}
 			}
-		}
-		
-		
-		
-			
-			
-		
+		}	
 		
 		System.out.println("valeur de la case = " + caseCase.getValue());
 		

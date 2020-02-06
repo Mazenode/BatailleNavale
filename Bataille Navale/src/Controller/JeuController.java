@@ -20,33 +20,22 @@ import View.PlateauView;
 public class JeuController implements KeyListener {
 	private JeuView view;
 	private JeuModel model;
-	private boolean turnPlayer;
+	private static boolean turnPlayer1;
+	private static boolean turnPlayer2;
 	private JButton bouton;
 
 	public JeuController(JeuView view, JeuModel model) {
 		this.view = view;
 		this.model = model;
-		turnPlayer = true;
+		turnPlayer1 = true;
+		turnPlayer2 = false;
 
-		/*
-		 * view.addMouseListener(new MouseAdapter() { public void
-		 * mouseClicked(MouseEvent e){
-		 * System.out.println("Mouse was clicked on my frame! x = "
-		 * +e.getX()+" y = "+e.getY()); } });
-		 */
-
-		/*
-		 * view.plateauView1.getListeGauche().forEach((n) ->
-		 * n.getButton().addMouseListener(new java.awt.event.MouseAdapter() { public
-		 * void mouseReleased(java.awt.event.MouseEvent evt) {
-		 * if(ShipController.placeShip==true) { if(view.gridGauche[n.getX()][n.getY()]
-		 * == 0) { view.gridGauche[n.getX()][n.getY()] = 1;
-		 * ShipController.placeShip=false; model.printGrille(); } } } }));
-		 */
-		
 		if(view.mode == 1 || view.mode== 2) {
 			this.view.addKeyListener(this);
-			PlateauView.getListeDroite().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n)));
+			PlateauView.getListeDroite().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n,"a clic sur j2")));//j'ai changer ça pour savoir su quelle grille on clic
+			if (view.getNbJoueur() == 2){
+				PlateauView.getListeGauche().forEach((n) -> n.getButton().addActionListener(event -> caseClick(n,"a clic sur j1")));
+			}
 		}
 		else if (view.mode == 3) {
 			view.add(view.getBouton());
@@ -66,7 +55,7 @@ public class JeuController implements KeyListener {
 		view.gridGauche[caseCase.getX()][caseCase.getY()] = 1;
 	}
 
-	public boolean isBoardComplete(int[][] tab) {
+	public static boolean isBoardComplete(int[][] tab) {
 		// sets complete to true
 		boolean complete = true;
 
@@ -81,25 +70,50 @@ public class JeuController implements KeyListener {
 		return complete;
 	}
 
-	private void caseClick(Case caseCase) {
-		
-		if (turnPlayer == true) {
+	private void caseClick(Case caseCase,String g) {
+		// mode 1 joueur contre le bot
+		System.out.println(turnPlayer1);
+		if (turnPlayer1 && view.getNbJoueur() == 1) {
 			if (view.mode == 1) {
 				clickAnim(caseCase);
-			} 
+			}
 			else if (view.mode == 2) {
 				clickRadar(caseCase);
 			}
-			
-			
 
-			checkTurn();
+			checkTurnPlay1wBot();
 
-			turnPlayer = false;
+			turnPlayer1 = false;
 
-			setTimeout(() -> turnPlayer = true, 3000);
+			setTimeout(() -> turnPlayer1 = true, 3000);
+		}
+		// mode 2 joueur (plutôt tour par tour)
+		//System.out.println("turnplayer1 : " +turnPlayer1 +" turnplayer2: " + turnPlayer2);
+		else if (turnPlayer1 && view.getNbJoueur() == 2 && g.equals("a clic sur j2")){
+			if (view.mode == 1) {
+				clickAnim(caseCase);
+			}
+			else if (view.mode == 2) {
+				clickRadar(caseCase);
+				
+			}
+			checkTurnPlay();
+			turnPlayer1 = false;
+			turnPlayer2 = true;
+
 		}
 
+		else if (turnPlayer2 && view.getNbJoueur() == 2 && g.equals("a clic sur j1")){
+			if (view.mode == 1) {
+				clickAnim(caseCase);
+			}
+			else if (view.mode == 2) {
+				clickRadar(caseCase);
+			}
+			checkTurnPlay();
+			turnPlayer1 = true;
+			turnPlayer2 = false;
+		}
 	}
 
 	public static void setTimeout(Runnable runnable, int delay) {
@@ -114,8 +128,14 @@ public class JeuController implements KeyListener {
 	}
 
 	public void clickAnim(Case caseCase) {
-		AnimCase anim = new AnimCase(caseCase, view.gridDroite);
+		if (turnPlayer1){
+			AnimCase anim = new AnimCase(caseCase, view.gridDroite);
+		}
+		else {
+			AnimCase anim = new AnimCase(caseCase, view.gridGauche);
+		}
 	}
+
 
 	public void clickRadar(Case caseCase) {
 		AnimRadar radar = new AnimRadar(caseCase, PlateauView.getListeDroite(), view.gridDroite);
@@ -126,7 +146,7 @@ public class JeuController implements KeyListener {
 		view.add(anim.getButton());
 	}
 
-	public void checkTurn() {
+	public void checkTurnPlay1wBot() {
 		if (isBoardComplete(view.gridDroite)) {
 			view.finish();
 			
@@ -134,7 +154,25 @@ public class JeuController implements KeyListener {
 			setTimeout(() -> view.bot.playMove(), 1500);
 		}
 	}
+	public void checkTurnPlay() {
+		if (isBoardComplete(view.gridDroite) || isBoardComplete(view.gridGauche)) {
+			view.finish();
 
+		} if(turnPlayer1) {
+			turnPlayer1 = false;
+			turnPlayer2 = true;
+		}
+		else {
+			turnPlayer1 = true;
+			turnPlayer2 = false;
+		}
+	}
+
+	
+	public static boolean getTurnPlayer(){
+        return turnPlayer1;
+    }
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import Controller.JeuController;
+import View.Bot;
 import View.JeuView;
 import View.PlateauView;
 
@@ -26,18 +28,27 @@ public class AnimArtillerie {
 	public int width = (int)screenSize.getWidth();
 	public int height = (int)screenSize.getHeight();
 	private int mode;
+	private Bot bot;
+	private boolean turnPlayer = true;
 	
 	public AnimArtillerie(ArrayList<Case> listeCase, int mode) {
 		this.listeCase = listeCase;
 		this.mode = mode;
+		
+		bot = new Bot();
 		
 		bouton = new JButton();
 		bouton.setBounds(500 , 100, 200, 50);
 
 		t1 = new tt();
 		
-	
-		bouton.addActionListener(event -> cible());
+		bouton.addActionListener((event) -> cible());
+		
+		/*if(turnPlayer == true) {
+			
+			checkTurn();
+		}*/
+		
 		}
 	
 	public JButton getButton() {
@@ -45,20 +56,18 @@ public class AnimArtillerie {
 	}
 	
 	public void cible() {
+		
 		if(tempo == 0) {
 			tempo = 1;
-			System.out.println("tempo 0 = "+ y);
 			thread = new Thread(t1);
 			thread.start();
 			
 
 		}
 		else if(tempo == 1) {
-			System.out.println("tempo 1 = "+ y);
 			tempo = 2;
 		}
 		else {
-			System.out.println("tempo 2 = "+ y);
 			tempo = 0;
 			thread.stop();
 			if(mode == 3) {
@@ -69,30 +78,25 @@ public class AnimArtillerie {
 				else {
 					listeCase.get((y) * 10 + x).setValue(3);
 				}
-				
+				checkTurn();
 				
 			}
 			else if(mode == 4) {
-				if(AnimCase.getEvent() == 1) {
-					listeCase.get((y) * 10 + x).setValue(2);
-					JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 2; 
-				}
-				else {
-					listeCase.get((y) * 10 + x).setValue(3);
-					JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 3; 
-				}
-				
-				AnimRadar radar = new AnimRadar(listeCase.get((y) * 10 + x), listeCase, JeuView.gridDroite);
-			}
-			for(int i = 0; i < 10; i++) {
-				if(listeCase.get(i + (y) *10).getButton().getIcon() != null) {
-					if(listeCase.get(i + (y) *10).getButton().getIcon().equals(fond)) {
-						listeCase.get(i + (y) *10).getButton().setIcon(null);
-					}
-				}
-			}
+                AnimCase anim = new AnimCase(listeCase.get((y) * 10 + x), JeuModel.getGridDroite());
+                if(AnimCase.getEvent() == 1) {
+                    listeCase.get((y) * 10 + x).setValue(2);
+                    JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 2; 
+                }
+                else if(AnimCase.getEvent() == 2){
+                    listeCase.get((y) * 10 + x).setValue(3);
+                    JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 3; 
+                    AnimRadar radar = new AnimRadar(listeCase.get((y) * 10 + x), listeCase, JeuView.gridDroite);
+                }
+                checkTurn();
+            }
 			
 		}	
+	
 	}
 	
 	public class tt implements Runnable{
@@ -168,5 +172,15 @@ public class AnimArtillerie {
 				}
 			  }	
 		}
+	}
+	public void checkTurn() {
+		/*if (JeuController.isBoardComplete(JeuView.gridDroite)) {
+			
+			
+		} else {*/
+			//JeuView.setTextPrompteur("Au tour de l'ordinateur");
+
+			JeuController.setTimeout(() -> bot.playMove(), 1500);
+		//}
 	}
 }

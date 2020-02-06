@@ -11,11 +11,13 @@ public class JeuModel {
 	static int[][] caseInGrille;
 	public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static int width = (int)screenSize.getWidth();
-    public static int height = (int)screenSize.getHeight();	
+    public static int height = (int)screenSize.getHeight();
+    static int posXPremiereGrille;
 	
-	public JeuModel(int[][] gridGauche,int[][] gridDroite) {
+	public JeuModel(int[][] gridGauche,int[][] gridDroite, int posXPremiereGrille) {
 		this.gridGauche = gridGauche;
 		this.gridDroite = gridDroite;
+		this.posXPremiereGrille = posXPremiereGrille;
 
 	}	
 	/* test affiche grille */
@@ -81,7 +83,7 @@ public class JeuModel {
 			if(posY>i*(width/28)+(height/4) && posY<(i+1)*(width/28)+(height/4)) {
 				for(int j=0;j<10;j++) {
 					/* on cherche la première case de la grille par rapport à l'axe y (donc la colonne où veut être placé le bateau) */
-					if (posX>j*(width/28)+width/5 && posX<(j+1)*(width/28)+width/5) {
+					if (posX>j*(width/28)+posXPremiereGrille && posX<(j+1)*(width/28)+posXPremiereGrille) {
 						/* si le bateau peut être placé */
 						if(((ship.turnShip==false && j+ship.model.getLongueur()<=10)||(ship.turnShip==true && i+ship.model.getLongueur()<=10)) && caseDispo(gridGauche, i, j, ship)) {
 							clearBateaux(gridGauche,ship.idShip);
@@ -92,8 +94,9 @@ public class JeuModel {
 									gridGauche[i+k][j]=ship.idShip;
 								}
 							}
-							ship.defaultPosX=j*(width/28)+(width/5);
+							ship.defaultPosX=j*(width/28)+posXPremiereGrille;
 							ship.defaultPosY=i*(width/28)+(height/4);
+							ship.defaultTurn=ship.turnShip;
 						}
 					}
 				}
