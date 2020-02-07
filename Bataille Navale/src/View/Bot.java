@@ -4,7 +4,9 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+import Model.AnimCase;
 import Model.Case;
+import Model.JeuModel;
 
 public class Bot {
 	private static int valeur,d=0,x=0,i=0;
@@ -24,7 +26,7 @@ public class Bot {
 		Random r = new Random();
 		//z = 0;//(int) (r.nextInt(y - 0));
 		d = getValeur();
-		x = (int) (50 + r.nextInt(80 - 50));
+		x = (int) (r.nextInt(99 - 0));
 		this.x = x;
 		System.out.println("Case : " + x);
 
@@ -52,10 +54,7 @@ public class Bot {
 
 	public int smartplay(){
 		Random rand = new Random();
-		//List<Integer> dirlist = Arrays.asList(-1,1,10,-10);
-		/*System.out.println("floped: " + floped);
-		System.out.println("firsttry: " + firsttry);*/
-
+		
 		if (!floped && !firsttry){//tant que l'on touche on continue dans cette direction
 			System.out.println("1er randElement :" + randElement + " d :" + d);
 			d+= randElement;
@@ -66,6 +65,20 @@ public class Bot {
 			System.out.println("2er randElement :" + randElement + "d :" + d);
 			randElement = dirlist.get(rand.nextInt(dirlist.size()));
 			d = this.x;
+			if(d == 0 || d == 1 || d == 2 || d == 3 || d == 4 || d == 5 || d == 6 || d == 7 || d == 8 || d == 9 && randElement == -10) {
+				dirlist.remove(dirlist.indexOf(randElement));
+				randElement = dirlist.get(rand.nextInt(dirlist.size()));
+				d+=randElement;
+				tirisok(d);
+				return d;
+			}
+			if(d == 99 && randElement == 1 || d == 99 && randElement == 10 ) {
+				dirlist.remove(dirlist.indexOf(randElement));
+				randElement = dirlist.get(rand.nextInt(dirlist.size()));
+				d+=randElement;
+				tirisok(d);
+				return d;
+			}
 			d+=randElement;
 			dirlist.remove(dirlist.indexOf(randElement));
 			System.out.println(dirlist);
@@ -96,9 +109,7 @@ public class Bot {
 		else if (floped && firsttry){
 			playMove();
 		}
-		/*else if (!floped && !firsttry || floped && !firsttry || !floped && firsttry){
-			smartplay();
-		}*/
+		
 	}
 
 

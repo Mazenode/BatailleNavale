@@ -14,7 +14,7 @@ public class ShipController extends MouseAdapter{
 	public ShipModel model;
 	public ShipController control;
 	public boolean moveShip;
-	public boolean turnShip=true;
+	public boolean turnShip=true, defaultTurn=true;
 	public int defaultPosX, defaultPosY;
 	public int longueurShip, oldLongueur, hauteurShip, idShip;
 	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,13 +42,19 @@ public class ShipController extends MouseAdapter{
 					/* si on le pose, on va le set dans la grille */
 					if(moveShip==false) {
 						/* on identifie la où placer le bateau */
-						JeuModel.setBateaux((int)MouseInfo.getPointerInfo().getLocation().getX(), (int)MouseInfo.getPointerInfo().getLocation().getY(), control);
+						JeuModel.setBateaux((int)MouseInfo.getPointerInfo().getLocation().getX(), (int)MouseInfo.getPointerInfo().getLocation().getY(), control, view.grid);
 						/* on le place aux coordonnées définit */
-						if(turnShip) {
+						if(defaultTurn) {
+							model.changeShip(defaultTurn, longueurShip, hauteurShip);
+							turnShip=defaultTurn;
 							view.setBounds(defaultPosX,defaultPosY,longueurShip,hauteurShip);
 						}else {
+							model.changeShip(defaultTurn, longueurShip, hauteurShip);
+							turnShip=defaultTurn;
 							view.setBounds(defaultPosX,defaultPosY,hauteurShip,longueurShip);
 						}
+					}else {
+						JeuModel.shipInFirstPos(control);
 					}
 				}else{
 					/* si clique Droit sur un bateau : on le rotate */

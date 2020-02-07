@@ -1,6 +1,13 @@
 package Main;
 
+import Controller.JeuController;
+import Controller.MenuPrincipalController;
+import Model.JeuModel;
+import Model.MenuPrincipalModel;
+import Model.Sound;
 import View.JeuView;
+import View.MenuPrincipalView;
+import View.PlateauView;
 
 public class Main {
 
@@ -11,15 +18,15 @@ public class Main {
 		 choix de l'utilisateur */
 		
 
-		/*MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
+		MenuPrincipalView menuPrincipalView = new MenuPrincipalView();
 		
 		MenuPrincipalModel menuPrincipalModel = new MenuPrincipalModel();
 	
-		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);*/
+		MenuPrincipalController menuPrincipalController = new MenuPrincipalController(menuPrincipalView, menuPrincipalModel);
 		
 		//Sound.playSound("/battlefield-1942-theme.wav");
 
-		JeuView jeuView = new JeuView(1,4 );
+		//JeuView jeuView = new JeuView(1, 3);
 		
 		/*JeuModel jeuModel = new JeuModel();
 		

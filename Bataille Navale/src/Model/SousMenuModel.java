@@ -14,6 +14,11 @@ public class SousMenuModel {
 	private ImageIcon imgMode2Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-2-active.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
 	private ImageIcon imgMode3Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-3-active.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
 	private ImageIcon imgMode4Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-mode-4-active.png")).getImage().getScaledInstance(2*width/9, height/12, Image.SCALE_DEFAULT));
+	private ImageIcon imgChoixBateau1Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-bateau-1-active.png")).getImage().getScaledInstance(width/28, width/28, Image.SCALE_DEFAULT));
+	private ImageIcon imgChoixBateau2Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-bateau-2-active.png")).getImage().getScaledInstance(width/28, width/28, Image.SCALE_DEFAULT));
+	private ImageIcon imgChoixBateau3Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-bateau-3-active.png")).getImage().getScaledInstance(width/28, width/28, Image.SCALE_DEFAULT));
+	private ImageIcon imgChoixBateau4Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-bateau-4-active.png")).getImage().getScaledInstance(width/28, width/28, Image.SCALE_DEFAULT));
+	private ImageIcon imgChoixBateau5Active = new ImageIcon(new ImageIcon(this.getClass().getResource("/bouton-bateau-5-active.png")).getImage().getScaledInstance(width/28, width/28, Image.SCALE_DEFAULT));
 	private ImageIcon imgPopUp = new ImageIcon(this.getClass().getResource("/pop-up.png"));
 	private String modeExplication1 = "<html>Chaque joueur essaye de deviner la position des navires ennemis et\r\n" + 
 			" tenter <br/>de les couler.</html>";
@@ -42,6 +47,26 @@ public class SousMenuModel {
 	
 	public ImageIcon getMode4Active() {
 		return imgMode4Active;
+	}
+	
+	public ImageIcon getShip1Active() {
+		return imgChoixBateau1Active;
+	}
+	
+	public ImageIcon getShip2Active() {
+		return imgChoixBateau2Active;
+	}
+	
+	public ImageIcon getShip3Active() {
+		return imgChoixBateau3Active;
+	}
+	
+	public ImageIcon getShip4Active() {
+		return imgChoixBateau4Active;
+	}
+	
+	public ImageIcon getShip5Active() {
+		return imgChoixBateau5Active;
 	}
 	
 	public ImageIcon getPopUp() {

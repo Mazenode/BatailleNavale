@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import Controller.JeuController;
-import View.Bot;
 import View.JeuView;
 import View.PlateauView;
+import Model.JeuModel;
+import Controller.JeuController;
 
 public class AnimArtillerie {
 	private JButton bouton;
@@ -24,31 +24,27 @@ public class AnimArtillerie {
 	private ImageIcon splash = new ImageIcon(this.getClass().getResource("/splash-finale.png"));
 	private ImageIcon explosion = new ImageIcon(this.getClass().getResource("/explosion-finale.png"));
 	private ImageIcon fond = new ImageIcon(this.getClass().getResource("/artillerie.png"));
+	private ImageIcon clic0 = new ImageIcon(new ImageIcon(this.getClass().getResource("/clic.png")).getImage());
 	public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	public int width = (int)screenSize.getWidth();
 	public int height = (int)screenSize.getHeight();
 	private int mode;
-	private Bot bot;
-	private boolean turnPlayer = true;
+	private JeuController control;
+	private JeuView view;
 	
-	public AnimArtillerie(ArrayList<Case> listeCase, int mode) {
+	public AnimArtillerie(ArrayList<Case> listeCase, int mode, JeuController control, JeuView view) {
 		this.listeCase = listeCase;
 		this.mode = mode;
+		this.view = view;
+		this.control = control;
 		
-		bot = new Bot();
-		
-		bouton = new JButton();
-		bouton.setBounds(500 , 100, 200, 50);
+		bouton = new JButton(clic0);
+		bouton.setBounds(0,0, 200, 50);
 
 		t1 = new tt();
 		
-		bouton.addActionListener((event) -> cible());
-		
-		/*if(turnPlayer == true) {
-			
-			checkTurn();
-		}*/
-		
+	
+		bouton.addActionListener(event -> cible());
 		}
 	
 	public JButton getButton() {
@@ -56,18 +52,20 @@ public class AnimArtillerie {
 	}
 	
 	public void cible() {
-		
 		if(tempo == 0) {
 			tempo = 1;
+			System.out.println("tempo 0 = "+ y);
 			thread = new Thread(t1);
 			thread.start();
 			
 
 		}
 		else if(tempo == 1) {
+			System.out.println("tempo 1 = "+ y);
 			tempo = 2;
 		}
 		else {
+			System.out.println("tempo 2 = "+ y);
 			tempo = 0;
 			thread.stop();
 			if(mode == 3) {
@@ -78,25 +76,32 @@ public class AnimArtillerie {
 				else {
 					listeCase.get((y) * 10 + x).setValue(3);
 				}
-				checkTurn();
+				checkTurnBot();
+				
 				
 			}
 			else if(mode == 4) {
-                AnimCase anim = new AnimCase(listeCase.get((y) * 10 + x), JeuModel.getGridDroite());
-                if(AnimCase.getEvent() == 1) {
-                    listeCase.get((y) * 10 + x).setValue(2);
-                    JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 2; 
-                }
-                else if(AnimCase.getEvent() == 2){
-                    listeCase.get((y) * 10 + x).setValue(3);
-                    JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 3; 
-                    AnimRadar radar = new AnimRadar(listeCase.get((y) * 10 + x), listeCase, JeuView.gridDroite);
-                }
-                checkTurn();
-            }
+				AnimCase anim = new AnimCase(listeCase.get((y) * 10 + x), JeuModel.getGridDroite());
+				if(AnimCase.getEvent() == 1) {
+					listeCase.get((y) * 10 + x).setValue(2);
+					JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 2; 
+				}
+				else if(AnimCase.getEvent() == 2){
+					listeCase.get((y) * 10 + x).setValue(3);
+					JeuView.gridDroite[listeCase.get((y) * 10 + x).getX()][listeCase.get((y) * 10 + x).getY()] = 3; 
+					AnimRadar radar = new AnimRadar(listeCase.get((y) * 10 + x), listeCase, JeuView.gridDroite);
+				}
+				checkTurnBot();
+			}
+			for(int i = 0; i < 10; i++) {
+				if(listeCase.get(i + (y) *10).getButton().getIcon() != null) {
+					if(listeCase.get(i + (y) *10).getButton().getIcon().equals(fond)) {
+						listeCase.get(i + (y) *10).getButton().setIcon(null);
+					}
+				}
+			}
 			
 		}	
-	
 	}
 	
 	public class tt implements Runnable{
@@ -173,14 +178,28 @@ public class AnimArtillerie {
 			  }	
 		}
 	}
-	public void checkTurn() {
-		/*if (JeuController.isBoardComplete(JeuView.gridDroite)) {
+	public boolean isBoardComplete(ArrayList<Case> listeCase) {
+		boolean complete = false;
+		int compteur = JeuModel.compteurShip;
+		for (int i = 0; i<100; i++) {
+			if(listeCase.get(i).getValue()==2) {
+				compteur -= 1;
+			}
+		}
+		if(compteur == 0) {
+			complete = true;
+		}
+		System.out.println(compteur);
+		return complete;
+	}
+	public void checkTurnBot() {
+		if (isBoardComplete(listeCase)) {
+			view.finish();
 			
-			
-		} else {*/
-			//JeuView.setTextPrompteur("Au tour de l'ordinateur");
+		} else {
+			view.setPrompteur("Au tour de l'ordinateur");
 
-			JeuController.setTimeout(() -> bot.playMove(), 1500);
-		//}
+			control.setTimeout(() -> view.bot.playMove(), 1500);
+		}
 	}
 }

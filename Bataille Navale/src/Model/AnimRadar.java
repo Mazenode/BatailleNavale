@@ -31,12 +31,13 @@ public class AnimRadar {
 		
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				if(grid[i][j] > 5) {
+				if(grid[i][j] >= 5) {
 					listeCase.get(i * 10 + j).setValue(1);
+					System.out.println("C'est bon !");
 				}
 			}
-		}	
-		
+		}
+
 		System.out.println("valeur de la case = " + caseCase.getValue());
 		
 		/*for (int j = 0; j < 100; j++) {
@@ -44,12 +45,11 @@ public class AnimRadar {
 				System.out.println("");
 			}
 			System.out.print(" " + PlateauView.getListeDroite().get(j).getValue());
-
 		}*/
 
 		// setCase();
 
-		if(caseCase.getValue() == 1) {
+		if(caseCase.getValue() ==1) {
 			AnimCase anim = new AnimCase(caseCase, grid);
 		} else {
 			propa();

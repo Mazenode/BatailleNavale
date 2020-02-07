@@ -79,7 +79,7 @@ public class MenuPrincipalController{
 		view.getJ1Label().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				SousMenuView sousMenuView = new SousMenuView();
+				SousMenuView sousMenuView = new SousMenuView(1);
 				
 				SousMenuModel sousMenuModel = new SousMenuModel();
 				
@@ -92,7 +92,7 @@ public class MenuPrincipalController{
 		view.getJ2Label().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				SousMenuView sousMenuView = new SousMenuView();
+				SousMenuView sousMenuView = new SousMenuView(2);
 				
 				SousMenuModel sousMenuModel = new SousMenuModel();
 				

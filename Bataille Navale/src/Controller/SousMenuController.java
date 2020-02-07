@@ -11,6 +11,7 @@ import View.SousMenuView;
 public class SousMenuController {
 	private SousMenuView view;
 	private SousMenuModel model;
+	private static int nbBateau=5;
 	
 	public SousMenuController(SousMenuView view, SousMenuModel model, int nbJoueur){
 		this.view = view;
@@ -71,7 +72,7 @@ public class SousMenuController {
 		view.getMode1().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView(nbJoueur, 1);
+				JeuView jeuView = new JeuView(nbJoueur, 1, nbBateau);
 				
 				view.setVisible(false);
 			}
@@ -80,7 +81,7 @@ public class SousMenuController {
 		view.getMode2().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView(nbJoueur, 2);
+				JeuView jeuView = new JeuView(nbJoueur, 2, nbBateau);
 				
 				view.setVisible(false);
 			}
@@ -89,7 +90,7 @@ public class SousMenuController {
 		view.getMode3().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView(nbJoueur, 3);
+				JeuView jeuView = new JeuView(nbJoueur, 3, nbBateau);
 				
 				view.setVisible(false);
 			}
@@ -98,9 +99,60 @@ public class SousMenuController {
 		view.getMode4().addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e){
 				
-				JeuView jeuView = new JeuView(nbJoueur, 4);
+				JeuView jeuView = new JeuView(nbJoueur, 4, nbBateau);
 				
 				view.setVisible(false);
+			}
+		});
+		
+		view.getShip1().addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				view.getShip1().setIcon(model.getShip1Active());
+				view.getShip2().setIcon(view.getShip2Img());
+				view.getShip3().setIcon(view.getShip3Img());
+				view.getShip4().setIcon(view.getShip4Img());
+				view.getShip5().setIcon(view.getShip5Img());
+				nbBateau=1;
+			}
+		});
+		view.getShip2().addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				view.getShip1().setIcon(view.getShip1Img());
+				view.getShip2().setIcon(model.getShip2Active());
+				view.getShip3().setIcon(view.getShip3Img());
+				view.getShip4().setIcon(view.getShip4Img());
+				view.getShip5().setIcon(view.getShip5Img());
+				nbBateau=2;
+			}
+		});
+		view.getShip3().addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				view.getShip1().setIcon(view.getShip1Img());
+				view.getShip2().setIcon(view.getShip2Img());
+				view.getShip3().setIcon(model.getShip3Active());
+				view.getShip4().setIcon(view.getShip4Img());
+				view.getShip5().setIcon(view.getShip5Img());
+				nbBateau=3;
+			}
+		});
+		view.getShip4().addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				view.getShip1().setIcon(view.getShip1Img());
+				view.getShip2().setIcon(view.getShip2Img());
+				view.getShip3().setIcon(view.getShip3Img());
+				view.getShip4().setIcon(model.getShip4Active());
+				view.getShip5().setIcon(view.getShip5Img());
+				nbBateau=4;
+			}
+		});
+		view.getShip5().addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e){
+				view.getShip1().setIcon(view.getShip1Img());
+				view.getShip2().setIcon(view.getShip2Img());
+				view.getShip3().setIcon(view.getShip3Img());
+				view.getShip4().setIcon(view.getShip4Img());
+				view.getShip5().setIcon(model.getShip5Active());
+				nbBateau=5;
 			}
 		});
 	}
