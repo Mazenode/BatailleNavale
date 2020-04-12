@@ -20,6 +20,7 @@ CMD: -Aller dans le dossier src du projet puis dans Main
      
 Voici la premiere fenêtre que vous devrier voir:
 
+
 ![BattailleNavaleMenus](https://user-images.githubusercontent.com/36196503/79071661-3bbbc700-7cdd-11ea-8a3e-36514b0fabaf.PNG)
 
 
@@ -27,6 +28,7 @@ Voici la premiere fenêtre que vous devrier voir:
 
 
 ![BattailleNavaleJ2](https://user-images.githubusercontent.com/36196503/79071695-63ab2a80-7cdd-11ea-8d1a-65b7a5dd014e.PNG)
+
 
 
 ## Fabriqué avec
@@ -42,7 +44,7 @@ Version Final ``1.0``
 
 
 ## Auteurs
-Listez le(s) auteur(s) du projet ici !
+
 * **Mathieu LÊ-HOANG** _alias_ [@MaxiMat91](https://github.com/MaxiMat91)
 * **Quentin CHAIGNAUD** _alias_ [@Mazenode](https://github.com/Mazenode)
 * **Mathieu AUBRY** _alias_ [@Rysek](https://github.com/rezatera854)
